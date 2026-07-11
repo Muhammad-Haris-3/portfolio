@@ -26,6 +26,21 @@ export const highlights = [
   },
 ];
 
+export const skills = [
+  {
+    category: "Data Analytics",
+    items: ["Python", "Pandas", "Seaborn", "SQL", "PostgreSQL"],
+  },
+  {
+    category: "Web Development",
+    items: ["React", "Next.js", "Node.js", "Tailwind", "TypeScript"],
+  },
+  {
+    category: "Product Thinking",
+    items: ["UI Systems", "Responsive Design", "Testing", "Optimization"],
+  },
+];
+
 export const experience = [
   {
     title: "Frontend Developer",
@@ -40,6 +55,24 @@ export const experience = [
     period: "2023 - 2024",
     summary:
       "Built responsive pages, improved UI consistency, and supported production fixes.",
+  },
+];
+
+export const services = [
+  {
+    title: "Portfolio & Personal Brand",
+    summary:
+      "Clean, professional portfolio pages that are easy to update and ready to share with recruiters.",
+  },
+  {
+    title: "Dashboard Interfaces",
+    summary:
+      "Interactive, data-heavy UI layouts with clear structure and strong visual hierarchy.",
+  },
+  {
+    title: "Web App Builds",
+    summary:
+      "Responsive Next.js and React builds focused on performance, maintainability, and polish.",
   },
 ];
 
@@ -86,4 +119,20 @@ export const links = [
   { label: "GitHub", href: "https://github.com/" },
   { label: "LinkedIn", href: "https://www.linkedin.com/" },
   { label: "Resume", href: "/resume.pdf" },
+];
+
+export const navigation = [
+  { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Experience", href: "#experience" },
+  { label: "Services", href: "#services" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+];
+
+export const contactLinks = [
+  { label: "Email", href: "mailto:hello@example.com" },
+  { label: "GitHub", href: "https://github.com/" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/" },
 ];
