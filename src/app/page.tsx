@@ -1,9 +1,11 @@
-import { profile, projects } from "@/content/portfolio";
+const skillTags = ["Pandas", "PyTorch", "SQL"];
+const webTags = ["React", "Next.js", "Node.js", "Tailwind"];
 
-const techStacks = {
-  data: ["Python", "Pandas", "Seaborn", "PostgreSQL"],
-  web: ["React", "Next.js", "Node.js", "Tailwind"],
-};
+const stats = [
+  { value: "5+", label: "Years Experience" },
+  { value: "40+", label: "Projects Completed" },
+  { value: "12+", label: "Tech Certifications" },
+];
 
 export default function Home() {
   return (
@@ -11,7 +13,7 @@ export default function Home() {
       <div className="pointer-events-none fixed inset-0 -z-20 bg-[radial-gradient(circle_at_20%_10%,rgba(0,219,231,0.16),transparent_28%),radial-gradient(circle_at_85%_15%,rgba(0,242,255,0.10),transparent_24%),radial-gradient(circle_at_50%_90%,rgba(0,242,255,0.08),transparent_28%),linear-gradient(180deg,#0a0a0a_0%,#0c0c0c_55%,#0a0a0a_100%)]" />
       <div className="pointer-events-none fixed inset-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:88px_88px] opacity-20 [mask-image:linear-gradient(to_bottom,black,transparent_88%)]" />
 
-      <header className="fixed top-0 z-50 w-full border-b border-white/8 bg-[#0a0a0a]/55 backdrop-blur-xl">
+      <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-[#0a0a0a]/60 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
           <a
             href="#home"
@@ -20,7 +22,13 @@ export default function Home() {
             ALEX.DEV
           </a>
 
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-7 md:flex">
+            <a
+              className="border-b-2 border-[#00dbe7] pb-1 text-sm font-semibold text-[#e5e2e1]"
+              href="#home"
+            >
+              Home
+            </a>
             <a
               className="text-sm text-[#b9cacb] transition hover:text-[#e5e2e1]"
               href="#about"
@@ -28,10 +36,28 @@ export default function Home() {
               About
             </a>
             <a
-              className="border-b-2 border-[#00dbe7] pb-1 text-sm font-semibold text-[#00dbe7]"
+              className="text-sm text-[#b9cacb] transition hover:text-[#e5e2e1]"
+              href="#skills"
+            >
+              Skills
+            </a>
+            <a
+              className="text-sm text-[#b9cacb] transition hover:text-[#e5e2e1]"
+              href="#experience"
+            >
+              Experience
+            </a>
+            <a
+              className="text-sm text-[#b9cacb] transition hover:text-[#e5e2e1]"
               href="#projects"
             >
-              Work
+              Projects
+            </a>
+            <a
+              className="text-sm text-[#b9cacb] transition hover:text-[#e5e2e1]"
+              href="#services"
+            >
+              Services
             </a>
             <a
               className="text-sm text-[#b9cacb] transition hover:text-[#e5e2e1]"
@@ -39,255 +65,154 @@ export default function Home() {
             >
               Contact
             </a>
-            <a
-              href="#contact"
-              className="rounded-full bg-[#00f2ff] px-5 py-2 text-sm font-semibold text-[#00363a] transition duration-300 hover:scale-95 active:scale-90"
-            >
-              Connect
-            </a>
           </nav>
 
           <a
             href="#contact"
-            className="rounded-full bg-[#00f2ff] px-4 py-2 text-sm font-semibold text-[#00363a] md:hidden"
+            className="rounded-full bg-[#00f2ff] px-5 py-2 text-sm font-semibold text-[#00363a] transition duration-300 hover:scale-95 active:scale-90"
           >
-            Connect
+            Resume
           </a>
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-5 pb-10 pt-32 sm:px-8 lg:px-12">
+      <main className="mx-auto max-w-7xl px-5 pb-10 pt-28 sm:px-8 lg:px-12 lg:pt-32">
         <section
           id="home"
-          className="scroll-mt-28 pb-16 pt-4 sm:pb-20 lg:pb-24"
+          className="flex justify-center pb-16 sm:pb-20 lg:pb-24"
         >
-          <div className="max-w-5xl">
-            <h1 className="text-balance text-[clamp(3.2rem,8vw,5.9rem)] font-extrabold leading-[0.95] tracking-[-0.07em] text-[#f1f1f1] sm:max-w-6xl">
-              Hi, I&apos;m <span className="text-[#00dbe7]">Alex</span>. I turn
-              raw data into insights and build the apps that deliver them.
+          <div className="glass-card relative w-full max-w-5xl rounded-[28px] border border-white/10 bg-[rgba(26,26,26,0.6)] px-6 py-14 text-center shadow-[0_24px_80px_rgba(0,0,0,0.35)] sm:px-10 sm:py-16 lg:px-16 lg:py-20">
+            <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#00dbe7]">
+              <span className="text-[#00f2ff]">⚡</span>
+              Available for new projects
+            </div>
+
+            <h1 className="mx-auto max-w-4xl text-[clamp(3rem,6.8vw,5.7rem)] font-extrabold leading-[0.95] tracking-[-0.08em] text-[#f1f1f1]">
+              Hi, I&apos;m <span className="text-[#00dbe7]">Alex</span>.
+              Building the Future with Data &amp; Code.
             </h1>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <h2 className="mt-6 text-[clamp(1.5rem,2.6vw,2.25rem)] font-semibold tracking-[-0.04em] text-[#c8c6c5]">
+              Data Analyst &amp; Software Developer
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-[#b9cacb] sm:text-[15px] sm:leading-8">
+              Focused on transforming complex datasets into actionable insights
+              and crafting robust web applications from the ground up.
+            </p>
+
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <a
                 href="#projects"
-                className="rounded-xl bg-[#00f2ff] px-7 py-4 text-base font-semibold text-[#00363a] shadow-[0_18px_40px_rgba(0,242,255,0.22)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_55px_rgba(0,242,255,0.28)]"
+                className="rounded-2xl bg-[#e1fdff] px-10 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-[#00363a] shadow-[0_18px_40px_rgba(0,242,255,0.16)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_55px_rgba(0,242,255,0.22)]"
               >
-                View Projects
+                View My Work →
               </a>
               <a
                 href="#contact"
-                className="rounded-xl border border-white/14 bg-transparent px-7 py-4 text-base font-medium text-[#e5e2e1] transition duration-300 hover:-translate-y-0.5 hover:bg-white/5"
+                className="rounded-2xl border border-white/14 bg-transparent px-10 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-[#e5e2e1] transition duration-300 hover:-translate-y-0.5 hover:bg-white/5"
               >
-                Download CV
+                Download Resume
               </a>
             </div>
           </div>
         </section>
 
-        <section
-          id="about"
-          className="grid gap-4 pb-6 md:grid-cols-12 lg:gap-5"
-        >
-          <article className="glass-card col-span-12 rounded-[22px] border border-white/10 bg-[rgba(26,26,26,0.42)] p-7 md:col-span-7 lg:min-h-[330px] lg:p-8">
-            <div className="space-y-5">
-              <div className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-[#00dbe7] shadow-[0_0_18px_rgba(0,219,231,0.45)]" />
-                <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#b9cacb]">
-                  Biography
-                </span>
+        <section className="grid gap-5 md:grid-cols-12 lg:gap-6">
+          <article className="glass-card group md:col-span-8 rounded-[22px] border border-white/10 bg-[rgba(26,26,26,0.6)] p-6 transition duration-300 hover:-translate-y-1 hover:border-[#00dbe7]/20 hover:shadow-[0_20px_60px_rgba(0,219,231,0.10)] sm:p-8">
+            <div className="mb-8 flex items-start justify-between">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/6 text-[#e5e2e1]">
+                ⛃
               </div>
-              <p className="max-w-2xl text-[clamp(1.6rem,3vw,2.6rem)] font-bold leading-[1.08] tracking-[-0.05em] text-[#f1f1f1]">
-                Bridging the gap between engineering and analytics. I build
-                robust web apps that don&apos;t just function, they reveal
-                hidden patterns.
-              </p>
-            </div>
-          </article>
-
-          <article className="glass-card col-span-12 rounded-[22px] border border-white/10 bg-[rgba(26,26,26,0.42)] p-7 md:col-span-5 lg:p-8">
-            <div className="flex items-center gap-2">
-              <span className="h-3 w-3 rounded-full bg-[#00dbe7] shadow-[0_0_18px_rgba(0,219,231,0.45)]" />
-              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[#b9cacb]">
-                Tech Stack
+              <span className="text-white/20 transition group-hover:text-[#00dbe7]">
+                ↗
               </span>
             </div>
 
-            <div className="mt-8 space-y-6">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#b9cacb]">
-                  Data Analytics
-                </p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {techStacks.data.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full bg-[#2a2a2a] px-3 py-1 text-xs font-medium text-[#e5e2e1]"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#b9cacb]">
-                  Web Development
-                </p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {techStacks.web.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full bg-[#2a2a2a] px-3 py-1 text-xs font-medium text-[#e5e2e1]"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article className="glass-card col-span-12 rounded-[22px] border border-white/10 bg-[rgba(26,26,26,0.42)] p-7 text-center md:col-span-4 lg:p-8">
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-[#00dbe7]/20 bg-[#0f0f0f] shadow-[0_0_0_1px_rgba(0,219,231,0.12)]">
-              <span className="text-3xl text-[#00dbe7]">⌘</span>
-            </div>
-            <div className="mt-6">
-              <h3 className="text-4xl font-bold tracking-[-0.05em] text-[#f1f1f1]">
-                100+ WPM
+            <div className="max-w-2xl">
+              <h3 className="text-[clamp(1.6rem,2.8vw,2.4rem)] font-bold tracking-[-0.05em] text-[#e5e2e1]">
+                Advanced Analytics
               </h3>
-              <p className="mt-2 text-[#b9cacb]">Typing Velocity</p>
-            </div>
-          </article>
+              <p className="mt-3 max-w-xl text-sm leading-7 text-[#b9cacb]">
+                Harnessing Big Data to predict trends and optimize operations
+                with Python and R.
+              </p>
 
-          <article className="glass-card col-span-12 rounded-[22px] border border-white/10 bg-[rgba(26,26,26,0.42)] p-7 md:col-span-8 lg:p-8">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div className="max-w-3xl">
-                <h3 className="text-3xl font-bold tracking-[-0.05em] text-[#f1f1f1]">
-                  Full-Stack Precision
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-[#b9cacb]">
-                  Every line of code is optimized for scale and performance,
-                  ensuring data flows seamlessly from database to UI.
-                </p>
-              </div>
-              <div className="flex -space-x-3">
-                {["◐", "&lt;&gt;", "⌂"].map((icon) => (
-                  <div
-                    key={icon}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#1c1b1b] text-sm text-[#e5e2e1] shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+              <div className="mt-6 flex flex-wrap gap-2">
+                {skillTags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full bg-[#2a2a2a] px-3 py-1 text-xs font-medium text-[#e5e2e1]"
                   >
-                    {icon}
-                  </div>
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
           </article>
-        </section>
 
-        <section id="projects" className="pt-10">
-          <div className="mb-6 flex items-end justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#00dbe7]">
-                Portfolio
-              </p>
-              <h2 className="mt-2 text-[clamp(2.4rem,4vw,4rem)] font-bold tracking-[-0.06em] text-[#f1f1f1]">
-                Featured Projects
-              </h2>
+          <article className="glass-card md:col-span-4 rounded-[22px] border border-white/10 bg-[rgba(26,26,26,0.6)] p-6 transition duration-300 hover:-translate-y-1 hover:border-[#00dbe7]/20 hover:shadow-[0_20px_60px_rgba(0,219,231,0.10)] sm:p-8">
+            <div className="mb-8 flex items-start justify-between">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0f2e31] text-[#00f2ff]">
+                &lt;/&gt;
+              </div>
             </div>
-            <a
-              href="#"
-              className="hidden items-center gap-2 text-sm text-[#b9cacb] transition hover:text-[#00dbe7] md:flex"
-            >
-              View Archive <span>→</span>
-            </a>
-          </div>
 
-          <div className="grid gap-5 md:grid-cols-2">
-            {projects.slice(0, 2).map((project, index) => (
-              <article
-                key={project.name}
-                className="glass-card group overflow-hidden rounded-[22px] border border-white/10 bg-[rgba(26,26,26,0.42)] transition duration-300 hover:-translate-y-1"
-              >
-                <div className="relative h-80 overflow-hidden">
-                  <img
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
-                    src={
-                      index === 0
-                        ? "https://lh3.googleusercontent.com/aida/AP1WRLuWc65ohB7CsqH9eyT8RnnyJanJFWynoESmImN0W1I2V7Y0jRH19lrHNcEssfPopy-v1Gl6DHPI8iIWbrIrYlip8FLZpqBWf-PD0zNM3IwxuWo7pM_JU0-mTlMK5ScI0J104RI9RUorHenBlsf5tQN1iFlNZff2VLNAexGn1XoGDnCrpcfnLCZIHuOd05GqzSryhj0a7zpGCMGgrK5CRU6f73foTR2yOHrFAMzaKUR9ozs0hcpjw9tR0w"
-                        : "https://lh3.googleusercontent.com/aida/AP1WRLuDbMuwISgPAj7vihydUUpfjSuiC8pc_Mhoaj5a7B-ogxOktBX5cr1a4rN_KzcQIsFq6VX4JDYgnduyUFUAyS3sl8e6H_Zce3hNfQMK7XwqSNjCrbB0PGiFJsouLBtvMgctfMgUJzCE6FDuhSqfiHPXr6EL7Hj6DZy-Ml4j8y8MaBHc4K2mZndjh0lvKpnjPdX9dKxdF273Qp9F1PLeIDXdruZa9A2MiSqqNPWTY-SOXkxoF6l7_GGL3ZQ"
-                    }
-                    alt={project.name}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                  <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-[#0a0a0a]/80 px-3 py-1 text-xs font-medium text-[#e5e2e1] backdrop-blur-md">
-                    {index === 0 ? "Final Year Project" : "Habit Tracking App"}
-                  </div>
-                </div>
-                <div className="p-7">
-                  <h3 className="text-3xl font-semibold tracking-[-0.04em] text-[#f1f1f1]">
-                    {project.name}
-                  </h3>
-                  <p className="mt-4 text-sm leading-7 text-[#b9cacb]">
-                    {project.summary}
-                  </p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-[#00dbe7]"
-                      >
-                        <span>✦</span> {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section id="contact" className="pt-10">
-          <article className="glass-card relative overflow-hidden rounded-[22px] border border-white/10 bg-[rgba(26,26,26,0.42)] px-6 py-20 text-center sm:px-10 lg:px-12">
-            <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[#00f2ff]/10 blur-3xl" />
-            <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-[#00f2ff]/5 blur-3xl" />
-            <div className="relative z-10 mx-auto max-w-3xl">
-              <h2 className="text-[clamp(2.6rem,5vw,4.5rem)] font-bold leading-[1.02] tracking-[-0.06em] text-[#f1f1f1]">
-                Let&apos;s build something <br />
-                <span className="text-[#00dbe7]">data-driven.</span>
-              </h2>
-              <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-[#b9cacb]">
-                Currently accepting select freelance projects and
-                collaborations. Reach out for a consultation.
+            <div className="max-w-xs">
+              <h3 className="text-[clamp(1.55rem,2.7vw,2.25rem)] font-bold tracking-[-0.05em] text-[#e5e2e1]">
+                Clean Code
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-[#b9cacb]">
+                Building scalable, high-performance web systems.
               </p>
-              <div className="mt-8 flex justify-center">
-                <a
-                  href="mailto:hello@example.com"
-                  className="rounded-full bg-[#00f2ff] px-8 py-4 text-base font-semibold text-[#00363a] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_50px_rgba(0,242,255,0.25)]"
-                >
-                  Start a Project
-                </a>
+
+              <div className="mt-8 h-1.5 w-full overflow-hidden rounded-full bg-white/5">
+                <div className="h-full w-[90%] rounded-full bg-[#e1fdff]" />
               </div>
             </div>
           </article>
+
+          {stats.map((stat) => (
+            <article
+              key={stat.label}
+              className="glass-card md:col-span-4 rounded-[22px] border border-white/10 bg-[rgba(26,26,26,0.6)] px-6 py-8 text-center transition duration-300 hover:-translate-y-1 hover:border-[#00dbe7]/20 hover:shadow-[0_20px_60px_rgba(0,219,231,0.10)]"
+            >
+              <div className="text-[clamp(2.5rem,4vw,3.8rem)] font-extrabold tracking-[-0.05em] text-[#e1fdff]">
+                {stat.value}
+              </div>
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#b9cacb]">
+                {stat.label}
+              </p>
+            </article>
+          ))}
         </section>
       </main>
 
-      <footer className="border-t border-white/8 bg-[#0a0a0a]">
+      <footer className="border-t border-white/5 bg-[#0a0a0a]">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 py-7 text-sm text-[#b9cacb] sm:px-8 lg:flex-row lg:px-12">
-          <div className="text-2xl font-extrabold tracking-[-0.08em] text-[#f1f1f1]">
-            ALEX.DEV
+          <div>
+            <div className="text-2xl font-extrabold tracking-[-0.08em] text-[#f1f1f1]">
+              ALEX.DEV
+            </div>
+            <div className="mt-1 text-xs">
+              © 2026 Alex Dev. Built with precision.
+            </div>
           </div>
+
           <div className="flex gap-6">
-            <a href="#about" className="transition hover:text-[#00dbe7]">
+            <a href="#" className="transition hover:text-[#00dbe7]">
               LinkedIn
             </a>
-            <a href="#projects" className="transition hover:text-[#00dbe7]">
+            <a href="#" className="transition hover:text-[#00dbe7]">
               GitHub
+            </a>
+            <a href="#" className="transition hover:text-[#00dbe7]">
+              Twitter
             </a>
             <a href="#contact" className="transition hover:text-[#00dbe7]">
               Email
             </a>
           </div>
-          <div>© 2026 ALEX.DEV. Built with precision.</div>
         </div>
       </footer>
     </main>
