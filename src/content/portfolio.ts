@@ -1,138 +1,233 @@
 export const profile = {
-  name: "Your Name",
-  role: "Frontend Developer | Builder | Problem Solver",
-  location: "Open to remote and hybrid roles",
+  name: "Muhammad Haris",
+  role: "Data Analyst",
+  location: "Multan, Pakistan",
   intro:
-    "I build thoughtful web experiences with a focus on clarity, speed, and maintainability. This portfolio is structured so you can keep adding projects, certificates, and career milestones without fighting the layout.",
+    "I focus on turning data into clear insights and practical decisions. This portfolio brings together my education, certifications, projects, and contact details in a clean format that is easy to scan and easy to grow.",
   currentlyWorkingOn:
-    "Refining this portfolio, adding case studies, and turning more ideas into production-ready work.",
+    "Completing the Advanced Data Analytics specialization and building more projects around analytics, Python, and data storytelling.",
 };
 
 export const highlights = [
   {
-    label: "Experience",
-    value: "3+ years",
-    detail: "Building web interfaces, landing pages, and internal tools.",
+    label: "Education",
+    value: "3",
+    detail: "University, college, and school milestones.",
+  },
+  {
+    label: "Coursera Tracks",
+    value: "2",
+    detail: "Google Data Analytics and Advanced Data Analytics.",
   },
   {
     label: "Projects",
-    value: "12+",
-    detail: "Shipping practice projects, client work, and live experiments.",
+    value: "3",
+    detail: "Final year, side, and portfolio projects.",
+  },
+];
+
+export const education = [
+  {
+    school: "Bahauddin Zakariya University, Multan",
+    period: "2022 - 2026",
+    degree: "University education",
+    summary:
+      "Studying and building a foundation for data analysis, problem solving, and applied technology work.",
   },
   {
-    label: "Certificates",
-    value: "5+",
-    detail: "Courses and certifications that support ongoing growth.",
+    school: "KIPS College, Multan",
+    period: "2020 - 2022",
+    degree: "FSc Pre-Engineering",
+    summary:
+      "Completed pre-engineering studies before moving into university and analytics-focused work.",
+  },
+  {
+    school: "Zavia School System, Multan",
+    period: "2018 - 2020",
+    degree: "Matriculation",
+    summary:
+      "Completed matric and built the early academic base that led into higher studies.",
   },
 ];
 
 export const skills = [
   {
     category: "Data Analytics",
-    items: ["Python", "Pandas", "Seaborn", "SQL", "PostgreSQL"],
+    items: ["Python", "Pandas", "R", "SQL", "Statistics"],
   },
   {
-    category: "Web Development",
-    items: ["React", "Next.js", "Node.js", "Tailwind", "TypeScript"],
+    category: "Learning Focus",
+    items: ["Data Cleaning", "Visualization", "Regression", "Machine Learning"],
   },
   {
-    category: "Product Thinking",
-    items: ["UI Systems", "Responsive Design", "Testing", "Optimization"],
-  },
-];
-
-export const experience = [
-  {
-    title: "Frontend Developer",
-    company: "Company Name",
-    period: "2024 - Present",
-    summary:
-      "Working on polished user interfaces, reusable components, and better developer workflows.",
-  },
-  {
-    title: "Web Developer Intern",
-    company: "Company Name",
-    period: "2023 - 2024",
-    summary:
-      "Built responsive pages, improved UI consistency, and supported production fixes.",
+    category: "Tools",
+    items: ["Coursera", "Google Data Analytics", "Advanced Data Analytics"],
   },
 ];
 
-export const services = [
+export const specializationCertificates = [
   {
-    title: "Portfolio & Personal Brand",
+    name: "Google Data Analytics Professional Certificate",
+    issuer: "Coursera",
+    status: "Completed",
+    href: "https://coursera.org/share/a522ab96113cdb824d259861eba7f9f0",
     summary:
-      "Clean, professional portfolio pages that are easy to update and ready to share with recruiters.",
+      "Specialization that combines the seven foundational Google Data Analytics courses plus job-search support with AI.",
+    courses: [
+      {
+        name: "Foundations: Data, Data Everywhere",
+        href: "https://coursera.org/share/236ab549cabcb578416ac35376fa9ab2",
+      },
+      {
+        name: "Ask Questions to Make Data-Driven Decisions",
+        href: "https://coursera.org/share/43ad1e0bc73a88b453f59485562bd785",
+      },
+      {
+        name: "Prepare Data for Exploration",
+        href: "https://coursera.org/share/7afecfe49f8b1dc82634e079ae51fa19",
+      },
+      {
+        name: "Process Data from Dirty to Clean",
+        href: "https://coursera.org/share/08dd33343c3ae957e976b1958d2785da",
+      },
+      {
+        name: "Analyze Data to Answer Questions",
+        href: "https://coursera.org/share/e689a3dc1794a0baecf8ac523c79d70c",
+      },
+      {
+        name: "Share Data Through the Art of Visualization",
+        href: "https://coursera.org/share/789f23153fa5778d23e7591be50d6652",
+      },
+      {
+        name: "Data Analysis with R Programming",
+        href: "https://coursera.org/share/91dc896e19e3e68b5062a061379ece88",
+      },
+      {
+        name: "Google Data Analytics Capstone",
+        href: "https://coursera.org/share/d2f8d50b3d914608075867dd76fa790c",
+      },
+      {
+        name: "Accelerate Your Job Search with AI",
+        href: "https://coursera.org/share/fd8412bb1f8b54043cb4afaea06af4b1",
+      },
+    ],
   },
   {
-    title: "Dashboard Interfaces",
+    name: "Advanced Data Analytics Specialization",
+    issuer: "Coursera",
+    status: "In progress",
+    href: "https://coursera.org/share/b99ab893aa4f15e12131b5ed71157d8a",
     summary:
-      "Interactive, data-heavy UI layouts with clear structure and strong visual hierarchy.",
+      "Currently working through the advanced track with statistics, regression, and machine learning.",
+    courses: [
+      {
+        name: "Foundations of Data Science",
+        href: "https://coursera.org/share/b99ab893aa4f15e12131b5ed71157d8a",
+      },
+      {
+        name: "Go Beyond the Numbers: Translate Data into Insights",
+      },
+      {
+        name: "The Power of Statistics",
+        href: "https://coursera.org/share/b0e1a3e41e519e5b8ac0559ee6ee7ad1",
+      },
+      {
+        name: "Regression Analysis: Simplify Complex Data Relationships",
+      },
+      {
+        name: "The Nuts and Bolts of Machine Learning",
+      },
+      {
+        name: "Google Advanced Data Analytics Capstone",
+      },
+      {
+        name: "Accelerate Your Job Search with AI",
+      },
+    ],
   },
   {
-    title: "Web App Builds",
+    name: "Python Learning",
+    issuer: "Coursera",
+    status: "Completed",
+    href: "https://coursera.org/share/a77b3baf309c16c724caf4c134d86ba0",
     summary:
-      "Responsive Next.js and React builds focused on performance, maintainability, and polish.",
-  },
-];
-
-export const certificates = [
-  {
-    name: "Certificate Name",
-    issuer: "Platform or Institute",
-    year: "2025",
-  },
-  {
-    name: "Certificate Name",
-    issuer: "Platform or Institute",
-    year: "2024",
-  },
-  {
-    name: "Certificate Name",
-    issuer: "Platform or Institute",
-    year: "2024",
+      "Python courses that support my day-to-day analytics work and future projects.",
+    courses: [
+      {
+        name: "Crash Course on Python",
+        href: "https://coursera.org/share/a77b3baf309c16c724caf4c134d86ba0",
+      },
+      {
+        name: "Get Started with Python",
+        href: "https://coursera.org/share/6d7c2e0f913ec60e18a66aa2fd093f41",
+      },
+    ],
   },
 ];
 
 export const projects = [
   {
-    name: "Project One",
+    name: "Final Year Project",
     summary:
-      "A portfolio-ready product or app that shows the problem, the approach, and the result.",
-    tags: ["Next.js", "UI", "Responsive"],
+      "Job Data Analysis, a data-focused project that explores job market information and presents insights in a live web app.",
+    href: "https://job-data-analysis.vercel.app/",
+    tags: ["Data Analysis", "Dashboard", "Vercel"],
   },
   {
-    name: "Project Two",
+    name: "Side Project",
     summary:
-      "A practical tool or dashboard with a strong focus on usability and structure.",
-    tags: ["React", "API", "Workflow"],
+      "Core Tracker, a side build that shows practical product thinking and iterative implementation.",
+    href: "https://core-tracker-sigma.vercel.app/",
+    tags: ["Productivity", "Web App", "Live"],
   },
   {
-    name: "Project Three",
+    name: "Portfolio Project",
     summary:
-      "An in-progress build you can update as you keep iterating and learning.",
-    tags: ["In progress", "Design", "Iteration"],
+      "My public portfolio site that collects my background, certifications, and project links in one place.",
+    href: "https://muhammad-haris-khokhar-portfolio.vercel.app/",
+    tags: ["Portfolio", "Brand", "Responsive"],
   },
 ];
 
 export const links = [
-  { label: "GitHub", href: "https://github.com/" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/" },
-  { label: "Resume", href: "/resume.pdf" },
+  { label: "GitHub", href: "https://github.com/Muhammad-Haris-3" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/muhammad-haris-khokhar/",
+  },
+  { label: "X", href: "https://x.com/hariskhokhar975" },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/muhammad_haris_khokhar/?hl=en",
+  },
 ];
 
 export const navigation = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
+  { label: "Education", href: "#education" },
   { label: "Skills", href: "#skills" },
-  { label: "Experience", href: "#experience" },
-  { label: "Services", href: "#services" },
+  { label: "Certificates", href: "#certificates" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
 
 export const contactLinks = [
-  { label: "Email", href: "mailto:hello@example.com" },
-  { label: "GitHub", href: "https://github.com/" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/" },
+  { label: "Email", href: "mailto:hariskhokhar975@gmail.com" },
+  { label: "GitHub", href: "https://github.com/Muhammad-Haris-3" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/muhammad-haris-khokhar/",
+  },
+  { label: "X", href: "https://x.com/hariskhokhar975" },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/muhammad_haris_khokhar/?hl=en",
+  },
+];
+
+export const contactDetails = [
+  { label: "Email", value: "hariskhokhar975@gmail.com" },
+  { label: "WhatsApp", value: "MuhammadHarisKhokhar" },
+  { label: "Location", value: "Multan, Pakistan" },
 ];

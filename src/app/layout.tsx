@@ -14,9 +14,9 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Your Name",
+  title: "Haris Profile | Portfolio",
   description:
-    "A live portfolio for showcasing experience, certificates, projects, and ongoing work.",
+    "A live portfolio for showcasing Haris, downloadable resume access, certificates, projects, and ongoing work.",
 };
 
 export default function RootLayout({
