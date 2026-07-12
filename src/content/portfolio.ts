@@ -65,6 +65,22 @@ export const skills = [
   },
 ];
 
+export const emailAddress = "hariskhokhar975@gmail.com";
+
+export const gmailComposeUrl = (to = emailAddress, subject = "", body = "") => {
+  const params = new URLSearchParams({ view: "cm", fs: "1", to });
+
+  if (subject) {
+    params.set("su", subject);
+  }
+
+  if (body) {
+    params.set("body", body);
+  }
+
+  return `https://mail.google.com/mail/?${params.toString()}`;
+};
+
 export const specializationCertificates = [
   {
     name: "Google Data Analytics Professional Certificate",
@@ -146,6 +162,24 @@ export const specializationCertificates = [
     ],
   },
   {
+    name: "Job Simulation Certificate in Data Analytics",
+    issuer: "Forage",
+    status: "Completed",
+    href: "https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_6a53c98f622c48f280718aa5_1783879276089_completion_certificate.pdf",
+    summary:
+      "A recent data analytics job simulation certificate that showcases practical, workplace-style analytics experience.",
+    courses: [],
+  },
+  {
+    name: "AI and Machine Learning Certificate",
+    issuer: "Government of Punjab via eHunar",
+    status: "Completed",
+    href: "https://ehunar.org/certificate-verification/cert_2mjw6bhs",
+    summary:
+      "An AI and machine learning credential awarded through the Government of Punjab's eHunar platform.",
+    courses: [],
+  },
+  {
     name: "Python Learning",
     issuer: "Coursera",
     status: "Completed",
@@ -213,7 +247,7 @@ export const navigation = [
 ];
 
 export const contactLinks = [
-  { label: "Email", href: "mailto:hariskhokhar975@gmail.com" },
+  { label: "Email", href: gmailComposeUrl() },
   { label: "GitHub", href: "https://github.com/Muhammad-Haris-3" },
   {
     label: "LinkedIn",
@@ -227,7 +261,7 @@ export const contactLinks = [
 ];
 
 export const contactDetails = [
-  { label: "Email", value: "hariskhokhar975@gmail.com" },
+  { label: "Email", value: emailAddress },
   { label: "WhatsApp", value: "MuhammadHarisKhokhar" },
   { label: "Location", value: "Multan, Pakistan" },
 ];

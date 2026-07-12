@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { Menu, X, BarChart3 } from 'lucide-react';
-import { navigation } from '@/content/portfolio';
+import { useState, useEffect } from "react";
+import { Menu, X, BarChart3 } from "lucide-react";
+import { navigation, gmailComposeUrl } from "@/content/portfolio";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,25 +12,32 @@ export function Navigation() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
     setIsOpen(false);
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-black/95 backdrop-blur-lg shadow-lg shadow-yellow-500/10 border-b border-yellow-500/20 py-3' : 'bg-black/80 backdrop-blur-sm py-4'}`}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-black/95 backdrop-blur-lg shadow-lg shadow-yellow-500/10 border-b border-yellow-500/20 py-3" : "bg-black/80 backdrop-blur-sm py-4"}`}
+    >
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection('#home')}>
+          <div
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={() => scrollToSection("#home")}
+          >
             <BarChart3 className="w-8 h-8 text-yellow-500 drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]" />
-            <span className="text-xl font-bold tracking-tight text-white uppercase">Muhammad Haris</span>
+            <span className="text-xl font-bold tracking-tight text-white uppercase">
+              Muhammad Haris
+            </span>
           </div>
 
           {/* Desktop Navigation */}
@@ -46,7 +53,9 @@ export function Navigation() {
               </button>
             ))}
             <a
-              href="mailto:hariskhokhar975@gmail.com"
+              href={gmailComposeUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-5 py-2 text-xs font-semibold text-black bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full hover:shadow-lg hover:shadow-yellow-500/30 transition-all hover:scale-[1.02] active:scale-95"
             >
               Contact Me
@@ -58,7 +67,11 @@ export function Navigation() {
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 hover:bg-yellow-500/10 rounded-lg transition-colors border border-yellow-500/30"
           >
-            {isOpen ? <X className="w-6 h-6 text-yellow-500" /> : <Menu className="w-6 h-6 text-yellow-500" />}
+            {isOpen ? (
+              <X className="w-6 h-6 text-yellow-500" />
+            ) : (
+              <Menu className="w-6 h-6 text-yellow-500" />
+            )}
           </button>
         </div>
 
@@ -76,7 +89,9 @@ export function Navigation() {
             ))}
             <div className="px-4 pt-2">
               <a
-                href="mailto:hariskhokhar975@gmail.com"
+                href={gmailComposeUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block w-full text-center py-3 text-sm font-semibold text-black bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-lg hover:shadow-lg hover:shadow-yellow-500/30 transition-all"
               >
                 Contact Me
