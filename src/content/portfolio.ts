@@ -124,17 +124,17 @@ export const specializationCertificates = [
       },
       {
         name: "Accelerate Your Job Search with AI",
-        href: "https://coursera.org/share/fd8412bb1f8b54043cb4afaea06af4b1",
+        href: "https://www.coursera.org/account/accomplishments/verify/5FG2759QZGZF",
       },
     ],
   },
   {
     name: "Advanced Data Analytics Specialization",
     issuer: "Coursera",
-    status: "In progress",
-    href: "https://coursera.org/share/b99ab893aa4f15e12131b5ed71157d8a",
+    status: "Completed",
+    href: "https://www.coursera.org/account/accomplishments/professional-cert/LHOHL4QWZZ3B",
     summary:
-      "Currently working through the advanced track with statistics, regression, and machine learning.",
+      "Completed the advanced track with statistics, regression, and machine learning.",
     courses: [
       {
         name: "Foundations of Data Science",
@@ -142,6 +142,7 @@ export const specializationCertificates = [
       },
       {
         name: "Go Beyond the Numbers: Translate Data into Insights",
+        href: "https://www.coursera.org/account/accomplishments/verify/7O31Q5W1AQX8",
       },
       {
         name: "The Power of Statistics",
@@ -149,15 +150,19 @@ export const specializationCertificates = [
       },
       {
         name: "Regression Analysis: Simplify Complex Data Relationships",
+        href: "https://www.coursera.org/account/accomplishments/verify/BIDD4S738RUI",
       },
       {
         name: "The Nuts and Bolts of Machine Learning",
+        href: "https://www.coursera.org/account/accomplishments/verify/FJTWJ21YFEVA",
       },
       {
         name: "Google Advanced Data Analytics Capstone",
+        href: "https://www.coursera.org/account/accomplishments/verify/BVP2DYJXTNKJ",
       },
       {
         name: "Accelerate Your Job Search with AI",
+        href: "https://www.coursera.org/account/accomplishments/verify/5FG2759QZGZF",
       },
     ],
   },

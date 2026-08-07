@@ -105,7 +105,7 @@ export function Hero() {
             <div className="absolute inset-0 bg-yellow-500/15 rounded-full blur-2xl"></div>
             <div className="relative z-10 w-full h-full p-2 bg-gradient-to-br from-yellow-500/30 to-transparent rounded-full border border-yellow-500/25 shadow-2xl">
               <ImageWithFallback
-                src="/Profile_Picture.jpg"
+                src="/Profile_Picture.png"
                 alt={profile.name}
                 className="w-full h-full object-cover rounded-full shadow-2xl border-2 border-yellow-500/40 hover:scale-[1.02] transition-transform duration-500"
               />
