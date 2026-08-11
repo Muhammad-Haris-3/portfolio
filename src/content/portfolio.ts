@@ -21,8 +21,8 @@ export const highlights = [
   },
   {
     label: "Projects",
-    value: "3",
-    detail: "Final year, side, and portfolio projects.",
+    value: "5",
+    detail: "Analytics case studies, product builds, and portfolio work.",
   },
 ];
 
@@ -82,6 +82,20 @@ export const gmailComposeUrl = (to = emailAddress, subject = "", body = "") => {
 };
 
 export const specializationCertificates = [
+  {
+    name: "Oracle Cloud Infrastructure AI Foundations",
+    issuer: "Oracle",
+    status: "Completed",
+    href: "/oracle-cloud-infrastructure-ai-foundations.pdf",
+    summary:
+      "Oracle Cloud Infrastructure AI Foundations certification covering core OCI concepts and AI fundamentals.",
+    courses: [
+      {
+        name: "Oracle Cloud Infrastructure AI Foundations",
+        href: "/oracle-cloud-infrastructure-ai-foundations.pdf",
+      },
+    ],
+  },
   {
     name: "Google Data Analytics Professional Certificate",
     issuer: "Coursera",
@@ -218,6 +232,20 @@ export const projects = [
       "Core Tracker, a side build that shows practical product thinking and iterative implementation.",
     href: "https://core-tracker-sigma.vercel.app/",
     tags: ["Productivity", "Web App", "Live"],
+  },
+  {
+    name: "OrderLens",
+    summary:
+      "Marketplace operations analytics over ~100,000 real orders, tracing which operational failures cost the most revenue and pricing the fix.",
+    href: "https://github.com/Muhammad-Haris-3/OrderLens",
+    tags: ["dbt", "PostgreSQL", "Statistics", "Tableau"],
+  },
+  {
+    name: "InsightForge",
+    summary:
+      "A no-code analytics platform: upload a CSV and get quality checks, statistical tests, a predictive model, and a downloadable PDF report.",
+    href: "https://insight-forge-beta.vercel.app",
+    tags: ["Next.js", "FastAPI", "scikit-learn", "Live"],
   },
   {
     name: "Portfolio Project",
