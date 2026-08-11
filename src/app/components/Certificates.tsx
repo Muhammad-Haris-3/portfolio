@@ -21,7 +21,12 @@ export function Certificates() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {specializationCertificates.map((cert, index) => (
+          {specializationCertificates.map((cert, index) => {
+            // Certificates backed by a hosted PDF open the document itself
+            // rather than an issuer verification page.
+            const isHostedPdf = cert.href.endsWith(".pdf");
+
+            return (
             <div
               key={cert.name}
               className="bg-gradient-to-br from-gray-900 to-black border border-yellow-500/20 rounded-2xl p-6 md:p-8 flex flex-col justify-between hover:border-yellow-500/40 hover:shadow-2xl hover:shadow-yellow-500/10 transition-all hover:scale-[1.02] group text-left"
@@ -89,12 +94,13 @@ export function Certificates() {
                   rel="noopener noreferrer"
                   className="w-full py-3.5 bg-gradient-to-r from-yellow-500 to-yellow-400 text-black font-semibold text-sm rounded-xl hover:shadow-lg hover:shadow-yellow-500/20 hover:scale-105 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
                 >
-                  Verify Credential
+                  {isHostedPdf ? "View Certificate" : "Verify Credential"}
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

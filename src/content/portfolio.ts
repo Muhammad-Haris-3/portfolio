@@ -193,10 +193,15 @@ export const specializationCertificates = [
     name: "AI and Machine Learning Certificate",
     issuer: "Government of Punjab via eHunar",
     status: "Completed",
-    href: "https://ehunar.org/certificate-verification/cert_2mjw6bhs",
+    href: "/machine-learning-ai-data-science.pdf",
     summary:
       "An AI and machine learning credential awarded through the Government of Punjab's eHunar platform.",
-    courses: [],
+    courses: [
+      {
+        name: "Machine Learning, AI & Data Science",
+        href: "/machine-learning-ai-data-science.pdf",
+      },
+    ],
   },
   {
     name: "Python Learning",
