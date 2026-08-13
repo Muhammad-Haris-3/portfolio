@@ -8,11 +8,23 @@ import {
   XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
-import { ExternalLink, BarChart3, PieChart as PieIcon, TrendingUp, Activity, type LucideIcon } from 'lucide-react';
+import { ExternalLink, BarChart3, PieChart as PieIcon, TrendingUp, Activity, Zap, type LucideIcon } from 'lucide-react';
 import { projects } from '@/content/portfolio';
 
 const tooltipStyle = { backgroundColor: '#000', border: '1px solid #eab308', borderRadius: '8px' };
 const tooltipLabelStyle = { color: '#fff' };
+
+// GridCast -> what each choice actually costs, in gCO2/kWh.
+//
+// Real figures from the live planner (/v1/plan, 2-hour load, 24-hour window),
+// not illustrative. The point of the chart is that the overnight habit almost
+// everyone follows sits within 1% of not thinking about it at all.
+const gridCastData = [
+  { choice: 'Recommended', intensity: 52.5 },
+  { choice: 'Random time', intensity: 125.6 },
+  { choice: 'Wait til 3am', intensity: 166.8 },
+  { choice: 'Run it now', intensity: 168.0 },
+];
 
 // Project 1: Job Data Analysis (Final Year Project) -> Job Market Openings BarChart
 const jobMarketData = [
@@ -69,6 +81,25 @@ type ProjectVisual = {
 
 // Keyed by the project name in @/content/portfolio
 const projectVisuals: Record<string, ProjectVisual> = {
+  GridCast: {
+    icon: Zap,
+    chart: (
+      <BarChart data={gridCastData}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <XAxis dataKey="choice" stroke="#9ca3af" fontSize={12} />
+        <YAxis stroke="#9ca3af" label={{ value: 'gCO2/kWh', angle: -90, position: 'insideLeft', fill: '#9ca3af' }} />
+        <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
+        <Legend wrapperStyle={{ color: '#fff' }} />
+        <Bar dataKey="intensity" name="Carbon intensity (gCO2/kWh)">
+          {gridCastData.map((entry) => (
+            <Cell key={entry.choice} fill={entry.choice === 'Recommended' ? '#eab308' : '#6b7280'} />
+          ))}
+        </Bar>
+      </BarChart>
+    ),
+    insight:
+      "Forecasts GB grid carbon intensity 48 hours ahead and writes each one to an append-only register before the outcome exists, then scores it automatically once the actual arrives - against naive baselines and against National Grid ESO's own forecast, recorded at the horizon it was received. The finding that matters is behavioural: waiting until 3am, the advice almost everyone follows, lands within 1% of running immediately (166.8 vs 168.0 gCO2/kWh) and is worse than picking at random, because off-peak tariffs solve demand peaks rather than carbon. On a wind-and-solar grid the clean hours have moved to the middle of the day. A gradient-boosting model roughly halves the incumbent's error but is running as a scored challenger rather than serving, because the promotion rule was committed before either model existed and requires ~1,440 scored forecasts per horizon first.",
+  },
   "Final Year Project": {
     icon: BarChart3,
     chart: (

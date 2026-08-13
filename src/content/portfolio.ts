@@ -225,6 +225,13 @@ export const specializationCertificates = [
 
 export const projects = [
   {
+    name: "GridCast",
+    summary:
+      "A live carbon-intensity forecasting service that publishes every forecast before the outcome exists, then grades itself in public against National Grid's own forecast.",
+    href: "https://grid-cast-sigma.vercel.app",
+    tags: ["Forecasting", "dbt", "scikit-learn", "Live"],
+  },
+  {
     name: "Final Year Project",
     summary:
       "Job Data Analysis, a data-focused project that explores job market information and presents insights in a live web app.",
