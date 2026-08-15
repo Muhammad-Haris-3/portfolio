@@ -5,14 +5,29 @@ import {
   BarChart, Bar,
   AreaChart, Area,
   PieChart, Pie, Cell,
-  XAxis, YAxis, CartesianGrid,
+  XAxis, YAxis, CartesianGrid, ReferenceLine,
   Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
-import { ExternalLink, BarChart3, PieChart as PieIcon, TrendingUp, Activity, Zap, type LucideIcon } from 'lucide-react';
+import { ExternalLink, BarChart3, PieChart as PieIcon, TrendingUp, Activity, Zap, Radar, type LucideIcon } from 'lucide-react';
 import { projects } from '@/content/portfolio';
 
 const tooltipStyle = { backgroundColor: '#000', border: '1px solid #eab308', borderRadius: '8px' };
 const tooltipLabelStyle = { color: '#fff' };
+
+// Bellwether -> how much of the model's margin rests on a single feature.
+//
+// Real figures from the live /kc2 endpoint, not illustrative: the offline
+// backtest over 11,188 events puts the model 0.107 PR-AUC above the best
+// single-feature baseline, and re-fitting without `account_newness` alone
+// drops that to 0.039 — under the 0.05 the pre-registered promotion rule
+// demands. The chart exists to show the finding the project publishes against
+// itself, which is the reason to look at it at all.
+const bellwetherData = [
+  { variant: 'All 28 features', margin: 0.107 },
+  { variant: 'Minus account age', margin: 0.039 },
+];
+
+const BELLWETHER_THRESHOLD = 0.05;
 
 // GridCast -> what each choice actually costs, in gCO2/kWh.
 //
@@ -81,6 +96,38 @@ type ProjectVisual = {
 
 // Keyed by the project name in @/content/portfolio
 const projectVisuals: Record<string, ProjectVisual> = {
+  Bellwether: {
+    icon: Radar,
+    chart: (
+      <BarChart data={bellwetherData}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <XAxis dataKey="variant" stroke="#9ca3af" fontSize={12} />
+        <YAxis
+          stroke="#9ca3af"
+          domain={[0, 0.12]}
+          label={{ value: 'PR-AUC margin', angle: -90, position: 'insideLeft', fill: '#9ca3af' }}
+        />
+        <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
+        <Legend wrapperStyle={{ color: '#fff' }} />
+        <ReferenceLine
+          y={BELLWETHER_THRESHOLD}
+          stroke="#f87171"
+          strokeDasharray="6 4"
+          label={{ value: 'Promotion threshold (0.05)', fill: '#f87171', fontSize: 12, position: 'insideTopRight' }}
+        />
+        <Bar dataKey="margin" name="Margin over best single-feature baseline">
+          {bellwetherData.map((entry) => (
+            <Cell
+              key={entry.variant}
+              fill={entry.margin >= BELLWETHER_THRESHOLD ? '#eab308' : '#6b7280'}
+            />
+          ))}
+        </Bar>
+      </BarChart>
+    ),
+    insight:
+      "Scores live English Wikipedia edits for the probability they will be reverted, writes each forecast to a register the writer role cannot UPDATE or DELETE — enforced by database grant, not by careful code — and grades itself only once the outcome has actually settled. 52,080 forecasts committed so far across two model versions, running unattended on scheduled jobs since 10 August. The finding it publishes rather than buries is the one charted here: on the 11,188-event backtest the model leads the best single-feature baseline by 0.107 PR-AUC, but re-fit without the single feature describing how new an account is, that margin falls to 0.039 — below the 0.05 its own pre-registered promotion rule requires. Twelve of the twenty-eight features measure exactly zero importance and were left in place, because removing them after seeing which scored badly would be selection. The claim is not that the model is good; it is that the system can be trusted about the model.",
+  },
   GridCast: {
     icon: Zap,
     chart: (

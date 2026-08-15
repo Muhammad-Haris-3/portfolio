@@ -21,7 +21,7 @@ export const highlights = [
   },
   {
     label: "Projects",
-    value: "5",
+    value: "7",
     detail: "Analytics case studies, product builds, and portfolio work.",
   },
 ];
@@ -225,16 +225,23 @@ export const specializationCertificates = [
 
 export const projects = [
   {
+    name: "Bellwether",
+    summary:
+      "A model that scores live Wikipedia edits for revert risk, commits all 52,000+ forecasts to an append-only register before the outcome exists, and retrains and replaces itself when its own accuracy decays.",
+    href: "https://bellwether-phi.vercel.app",
+    tags: ["MLOps", "PostgreSQL", "scikit-learn", "Live"],
+  },
+  {
     name: "GridCast",
     summary:
-      "A live carbon-intensity forecasting service that publishes every forecast before the outcome exists, then grades itself in public against National Grid's own forecast.",
+      "A live carbon-intensity forecasting service that publishes every 48-hour forecast before the outcome exists, then grades all four competing models in public against National Grid's own.",
     href: "https://grid-cast-sigma.vercel.app",
     tags: ["Forecasting", "dbt", "scikit-learn", "Live"],
   },
   {
     name: "Final Year Project",
     summary:
-      "Job Data Analysis, a data-focused project that explores job market information and presents insights in a live web app.",
+      "Job Data Analysis: 15,000+ scraped job listings parsed into salary and demand benchmarks, presented in a live web app.",
     href: "https://job-data-analysis.vercel.app/",
     tags: ["Data Analysis", "Dashboard", "Vercel"],
   },
@@ -255,7 +262,7 @@ export const projects = [
   {
     name: "InsightForge",
     summary:
-      "A no-code analytics platform: upload a CSV and get quality checks, statistical tests, a predictive model, and a downloadable PDF report.",
+      "A no-code analytics platform: upload a CSV and get quality checks, statistical tests, a predictive model, and a downloadable PDF report — backed by 153 automated tests across both layers.",
     href: "https://insight-forge-beta.vercel.app",
     tags: ["Next.js", "FastAPI", "scikit-learn", "Live"],
   },
