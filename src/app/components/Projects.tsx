@@ -94,6 +94,25 @@ type ProjectVisual = {
   insight: string;
 };
 
+// Every series below sets isAnimationActive={false}. It is not a style choice
+// and removing it empties the charts.
+//
+// Under recharts 3.9.2 with React 19.2.4 the entry animation never ticks, and
+// the shapes that grow from nothing stay at nothing: a Bar animates its height
+// up from 0 and a Pie its angle up from 0, and recharts declines to draw a
+// rectangle of zero height or a sector of zero angle. So the layers rendered —
+// <g class="recharts-bar-rectangle"> was present and correctly counted — with
+// no shape inside them. Axes, gridlines, legends, tooltips and reference lines
+// were unaffected throughout, which is what made it look like a working chart
+// that happened to have no data.
+//
+// The Area chart was the tell: it alone still drew, because its path is fully
+// shaped on the first frame and animation only reveals it. Five bar charts and
+// one pie were blank on the live site; the area beside them was not.
+//
+// Rendering at final geometry sidesteps the animation entirely. The charts
+// appear instantly instead of growing in.
+//
 // Keyed by the project name in @/content/portfolio
 const projectVisuals: Record<string, ProjectVisual> = {
   Bellwether: {
@@ -115,7 +134,7 @@ const projectVisuals: Record<string, ProjectVisual> = {
           strokeDasharray="6 4"
           label={{ value: 'Promotion threshold (0.05)', fill: '#f87171', fontSize: 12, position: 'insideTopRight' }}
         />
-        <Bar dataKey="margin" name="Margin over best single-feature baseline">
+        <Bar dataKey="margin" name="Margin over best single-feature baseline" isAnimationActive={false}>
           {bellwetherData.map((entry) => (
             <Cell
               key={entry.variant}
@@ -137,7 +156,7 @@ const projectVisuals: Record<string, ProjectVisual> = {
         <YAxis stroke="#9ca3af" label={{ value: 'gCO2/kWh', angle: -90, position: 'insideLeft', fill: '#9ca3af' }} />
         <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
         <Legend wrapperStyle={{ color: '#fff' }} />
-        <Bar dataKey="intensity" name="Carbon intensity (gCO2/kWh)">
+        <Bar dataKey="intensity" name="Carbon intensity (gCO2/kWh)" isAnimationActive={false}>
           {gridCastData.map((entry) => (
             <Cell key={entry.choice} fill={entry.choice === 'Recommended' ? '#eab308' : '#6b7280'} />
           ))}
@@ -157,8 +176,8 @@ const projectVisuals: Record<string, ProjectVisual> = {
         <YAxis yAxisId="right" orientation="right" stroke="#9ca3af" label={{ value: 'Avg Salary ($k)', angle: 90, position: 'insideRight', fill: '#9ca3af' }} />
         <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
         <Legend wrapperStyle={{ color: '#fff' }} />
-        <Bar yAxisId="left" dataKey="postings" fill="#eab308" name="Openings Tracked" />
-        <Bar yAxisId="right" dataKey="salary" fill="#6b7280" name="Avg Salary ($k)" />
+        <Bar yAxisId="left" dataKey="postings" fill="#eab308" name="Openings Tracked" isAnimationActive={false} />
+        <Bar yAxisId="right" dataKey="salary" fill="#6b7280" name="Avg Salary ($k)" isAnimationActive={false} />
       </BarChart>
     ),
     insight:
@@ -189,8 +208,8 @@ const projectVisuals: Record<string, ProjectVisual> = {
         <YAxis stroke="#9ca3af" domain={[0, 5]} label={{ value: 'Avg Review Score', angle: -90, position: 'insideLeft', fill: '#9ca3af' }} />
         <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
         <Legend wrapperStyle={{ color: '#fff' }} />
-        <Bar dataKey="kept" fill="#eab308" name="Promise Kept" />
-        <Bar dataKey="broken" fill="#6b7280" name="Promise Broken" />
+        <Bar dataKey="kept" fill="#eab308" name="Promise Kept" isAnimationActive={false} />
+        <Bar dataKey="broken" fill="#6b7280" name="Promise Broken" isAnimationActive={false} />
       </BarChart>
     ),
     insight:
@@ -205,7 +224,7 @@ const projectVisuals: Record<string, ProjectVisual> = {
         <YAxis type="category" dataKey="feature" stroke="#9ca3af" fontSize={12} width={110} />
         <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
         <Legend wrapperStyle={{ color: '#fff' }} />
-        <Bar dataKey="importance" fill="#eab308" name="Feature Importance (%)" />
+        <Bar dataKey="importance" fill="#eab308" name="Feature Importance (%)" isAnimationActive={false} />
       </BarChart>
     ),
     insight:
@@ -224,6 +243,7 @@ const projectVisuals: Record<string, ProjectVisual> = {
           outerRadius={90}
           fill="#8884d8"
           dataKey="value"
+          isAnimationActive={false}
         >
           {visitorData.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
