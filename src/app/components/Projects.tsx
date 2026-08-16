@@ -8,11 +8,25 @@ import {
   XAxis, YAxis, CartesianGrid, ReferenceLine,
   Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
-import { ExternalLink, BarChart3, PieChart as PieIcon, TrendingUp, Activity, Zap, Radar, type LucideIcon } from 'lucide-react';
+import { ExternalLink, BarChart3, PieChart as PieIcon, TrendingUp, Activity, Zap, Radar, Target, type LucideIcon } from 'lucide-react';
 import { projects } from '@/content/portfolio';
 
 const tooltipStyle = { backgroundColor: '#000', border: '1px solid #eab308', borderRadius: '8px' };
 const tooltipLabelStyle = { color: '#fff' };
+
+// Groundtruth -> four answers to one question, and the wrong one wins.
+//
+// Real figures from results/comparison.json. The randomised trial found +16.9%
+// on newcomer activation. The analysis that should NOT be believed lands at
+// +19.3%, missing by 2.4 points; the defensible one lands at +7.3% and cannot be
+// distinguished from zero, missing by 9.6. The chart exists to show that
+// inversion, which is the finding of the project.
+const groundtruthData = [
+  { analysis: 'Randomised trial', effect: 16.9, kind: 'truth' },
+  { analysis: 'All 31 wikis', effect: 19.3, kind: 'contaminated' },
+  { analysis: 'Two-way fixed effects', effect: 10.1, kind: 'contaminated' },
+  { analysis: 'Careful (20 wikis)', effect: 7.3, kind: 'careful' },
+];
 
 // Bellwether -> how much of the model's margin rests on a single feature.
 //
@@ -115,6 +129,36 @@ type ProjectVisual = {
 //
 // Keyed by the project name in @/content/portfolio
 const projectVisuals: Record<string, ProjectVisual> = {
+  Groundtruth: {
+    icon: Target,
+    chart: (
+      <BarChart data={groundtruthData} layout="vertical" margin={{ left: 30 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <XAxis type="number" stroke="#9ca3af" unit="%" domain={[0, 22]} />
+        <YAxis type="category" dataKey="analysis" stroke="#9ca3af" fontSize={11} width={140} />
+        <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
+        <Legend wrapperStyle={{ color: '#fff' }} />
+        <ReferenceLine
+          x={16.9}
+          stroke="#4ade80"
+          strokeDasharray="6 4"
+          label={{ value: 'the truth', fill: '#4ade80', fontSize: 11, position: 'top' }}
+        />
+        <Bar dataKey="effect" name="Estimated effect on activation (%)" isAnimationActive={false}>
+          {groundtruthData.map((entry) => (
+            <Cell
+              key={entry.analysis}
+              fill={
+                entry.kind === 'truth' ? '#4ade80' : entry.kind === 'careful' ? '#eab308' : '#6b7280'
+              }
+            />
+          ))}
+        </Bar>
+      </BarChart>
+    ),
+    insight:
+      "Wikipedia switched a newcomer feature on for language editions at different times, and separately ran a randomised trial of it and published the answer - so an observational estimate could be marked rather than believed. The rollout went alphabetically by language code, which makes the timing close to random and is what allows a cause to be separated from a coincidence. Eleven of thirty-one wikis were not timed that way, and measured alone they show a larger effect on a tighter interval than the twenty that were, which is backwards for a smaller sample and is what contamination looks like. The finding is the inversion: the careful analysis lands at +7.3% and cannot be distinguished from zero, while the analysis that should not be believed lands at +19.3% against the trial's +16.9% - close enough to look like a validated method. The pre-registration, committed alone in the first commit before any data existed, had already recorded that a close match was to be treated with suspicion rather than relief. Eight falsification tests, two of which failed, over 2.9 million newcomer accounts.",
+  },
   Bellwether: {
     icon: Radar,
     chart: (

@@ -21,7 +21,7 @@ export const highlights = [
   },
   {
     label: "Projects",
-    value: "7",
+    value: "8",
     detail: "Analytics case studies, product builds, and portfolio work.",
   },
 ];
@@ -224,6 +224,13 @@ export const specializationCertificates = [
 ];
 
 export const projects = [
+  {
+    name: "Groundtruth",
+    summary:
+      "Estimates a feature's effect from observational data, then marks that estimate against the randomised trial that already measured it. The careful analysis missed by 9.6 points; the contaminated one missed by 2.4.",
+    href: "https://groundtruth-jet.vercel.app",
+    tags: ["Causal Inference", "Difference-in-Differences", "DuckDB", "Live"],
+  },
   {
     name: "Bellwether",
     summary:
