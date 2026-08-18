@@ -21,7 +21,7 @@ export const highlights = [
   },
   {
     label: "Projects",
-    value: "8",
+    value: "9",
     detail: "Analytics case studies, product builds, and portfolio work.",
   },
 ];
@@ -224,6 +224,13 @@ export const specializationCertificates = [
 ];
 
 export const projects = [
+  {
+    name: "Triage",
+    summary:
+      "A model that lost to counting. At the capacity a hospital actually has — a few hundred follow-up calls a month — a gradient-boosted model does not beat sorting by one column, and adding diagnosis features raised AUC while costing ten real patients.",
+    href: "https://triage-brown.vercel.app",
+    tags: ["Next.js", "FastAPI", "scikit-learn", "Live"],
+  },
   {
     name: "Groundtruth",
     summary:
