@@ -28,6 +28,24 @@ const groundtruthData = [
   { analysis: 'Careful (20 wikis)', effect: 7.3, kind: 'careful' },
 ];
 
+// Triage -> what each way of choosing catches, at the capacity a hospital has.
+//
+// Real figures from the live /comparison?k=200 endpoint, measured on 19,765
+// held-out discharges with a base rate of 11.61%. The chart exists to show two
+// things at once: the model sits barely above one integer column (94.0 against
+// 88.9, a lift of 1.06x whose 95% interval spans 1.0), while age -- the rule
+// most follow-up programmes actually use -- sits barely above picking at
+// random. The expensive choice buys nothing measurable; the free one buys 3x.
+const triageData = [
+  { method: 'Prior admissions', caught: 88.9, served: true },
+  { method: 'Model (untuned)', caught: 94.0, served: false },
+  { method: 'Length of stay', caught: 30.1, served: false },
+  { method: 'Age band', caught: 28.2, served: false },
+  { method: 'Random', caught: 23.2, served: false },
+];
+
+const TRIAGE_RANDOM_FLOOR = 23.2;
+
 // Bellwether -> how much of the model's margin rests on a single feature.
 //
 // Real figures from the live /kc2 endpoint, not illustrative: the offline
@@ -129,6 +147,36 @@ type ProjectVisual = {
 //
 // Keyed by the project name in @/content/portfolio
 const projectVisuals: Record<string, ProjectVisual> = {
+  Triage: {
+    icon: Target,
+    chart: (
+      <BarChart data={triageData} layout="vertical" margin={{ left: 30 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <XAxis
+          type="number"
+          stroke="#9ca3af"
+          domain={[0, 100]}
+          label={{ value: 'Readmissions caught in the top 200', position: 'insideBottom', offset: -4, fill: '#9ca3af', fontSize: 12 }}
+        />
+        <YAxis type="category" dataKey="method" stroke="#9ca3af" fontSize={11} width={130} />
+        <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
+        <Legend wrapperStyle={{ color: '#fff' }} />
+        <ReferenceLine
+          x={TRIAGE_RANDOM_FLOOR}
+          stroke="#f87171"
+          strokeDasharray="6 4"
+          label={{ value: 'Random floor (23.2)', fill: '#f87171', fontSize: 12, position: 'insideTopRight' }}
+        />
+        <Bar dataKey="caught" name="Caught in the 200 patients called" isAnimationActive={false}>
+          {triageData.map((entry) => (
+            <Cell key={entry.method} fill={entry.served ? '#eab308' : '#6b7280'} />
+          ))}
+        </Bar>
+      </BarChart>
+    ),
+    insight:
+      "A hospital can follow up with a few hundred discharged patients a month, so the only question that matters is which few hundred. Measured on 19,765 held-out discharges, ranking by one integer already in the record - how many times the patient was admitted in the past year - catches 88.9 of the 200 called. An untuned gradient-boosted model given all 41 fields catches 94.0: a lift of 1.06x whose 95% bootstrap interval, resampled at patient level, runs [0.92, 1.23] and therefore includes 1.0. The kill criterion for exactly that outcome was written into the specification before any data was loaded, and it fired. One declared retry adding diagnosis codes made it worse in the way that matters most: AUC rose from 0.6680 to 0.6731 while the patients actually reached fell from 94 to 84. An analyst following the metric the literature reports would have shipped the richer model and reached ten fewer of the people who came back. The deployed site serves its call list from prior admissions, never from the model, and shows the model only alongside the interval that disqualifies it.",
+  },
   Groundtruth: {
     icon: Target,
     chart: (
