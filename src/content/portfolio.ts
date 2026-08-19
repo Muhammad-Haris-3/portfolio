@@ -21,7 +21,7 @@ export const highlights = [
   },
   {
     label: "Projects",
-    value: "9",
+    value: "10",
     detail: "Analytics case studies, product builds, and portfolio work.",
   },
 ];
@@ -224,6 +224,13 @@ export const specializationCertificates = [
 ];
 
 export const projects = [
+  {
+    name: "Verdict",
+    summary:
+      "A short piece on why most A/B tests are read wrong. Checking a test daily instead of once turns the 5% false-positive rate you were promised into 28.6% — measured live in the browser, with the correction derived rather than quoted.",
+    href: "https://verdict-lime.vercel.app",
+    tags: ["Statistics", "Experimentation", "Next.js", "Live"],
+  },
   {
     name: "Triage",
     summary:

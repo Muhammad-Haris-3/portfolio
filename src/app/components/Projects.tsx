@@ -28,6 +28,23 @@ const groundtruthData = [
   { analysis: 'Careful (20 wikis)', effect: 7.3, kind: 'careful' },
 ];
 
+// Verdict -> what peeking costs, measured on A/A tests where no effect exists.
+//
+// Real figures from the simulation the site runs in the browser: both arms have
+// the identical conversion rate, so every "winner" is false by construction.
+// Looking once returns the 4.9% you were promised. Checking daily across four
+// weeks -- 28 chances to be fooled -- returns 28.6%.
+const verdictData = [
+  { looks: '1 (at the end)', fpr: 4.9 },
+  { looks: '2 (fortnightly)', fpr: 8.4 },
+  { looks: '4 (weekly)', fpr: 12.9 },
+  { looks: '7 (every 4d)', fpr: 17.2 },
+  { looks: '14 (every 2d)', fpr: 23.2 },
+  { looks: '28 (daily)', fpr: 28.6 },
+];
+
+const VERDICT_PROMISED = 5;
+
 // Triage -> what each way of choosing catches, at the capacity a hospital has.
 //
 // Real figures from the live /comparison?k=200 endpoint, measured on 19,765
@@ -147,6 +164,28 @@ type ProjectVisual = {
 //
 // Keyed by the project name in @/content/portfolio
 const projectVisuals: Record<string, ProjectVisual> = {
+  Verdict: {
+    icon: Activity,
+    chart: (
+      <BarChart data={verdictData} margin={{ left: 10, bottom: 4 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <XAxis dataKey="looks" stroke="#9ca3af" fontSize={10} interval={0} />
+        <YAxis stroke="#9ca3af" unit="%" domain={[0, 32]}
+               label={{ value: 'False positives', angle: -90, position: 'insideLeft', fill: '#9ca3af' }} />
+        <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
+        <Legend wrapperStyle={{ color: '#fff' }} />
+        <ReferenceLine y={VERDICT_PROMISED} stroke="#f87171" strokeDasharray="6 4"
+          label={{ value: 'The 5% you were promised', fill: '#f87171', fontSize: 12, position: 'insideTopRight' }} />
+        <Bar dataKey="fpr" name="False positives, on tests with no real difference" isAnimationActive={false}>
+          {verdictData.map((entry) => (
+            <Cell key={entry.looks} fill={entry.fpr <= VERDICT_PROMISED + 0.5 ? '#eab308' : '#6b7280'} />
+          ))}
+        </Bar>
+      </BarChart>
+    ),
+    insight:
+      "Statistics promises you will be fooled 5% of the time, but that promise holds only if you look once, at a sample size fixed in advance. This simulates A/A tests -- both versions identical, so every winner it finds is false by construction -- and measures what happens when you check as it runs. One look returns 4.9%. Checking daily across four weeks gives 28 chances to be fooled and returns 28.6%: more than one in four apparent wins is nothing at all. The correction is derived rather than quoted. A single pass records the smallest p-value each experiment ever showed, which makes the false-positive rate at any threshold simply the share whose minimum fell below it, and the corrected threshold a percentile of the same distribution. At four looks that yields 0.0183 against Pocock's published 0.0182 -- the textbook answer, arrived at without being told it. Deliberately a single page with no backend: a database here would store nothing, and adding one to look substantial is the overstatement the project argues against.",
+  },
   Triage: {
     icon: Target,
     chart: (
