@@ -21,7 +21,7 @@ export const highlights = [
   },
   {
     label: "Projects",
-    value: "10",
+    value: "11",
     detail: "Analytics case studies, product builds, and portfolio work.",
   },
 ];
@@ -224,6 +224,13 @@ export const specializationCertificates = [
 ];
 
 export const projects = [
+  {
+    name: "Headway",
+    summary:
+      "Transit agencies publish millions of arrival predictions and their own error bars, and nobody keeps score. Headway records the MBTA’s predictions before the outcome exists and grades them — currently collecting, and publishing no accuracy figure until a threshold fixed before the data existed is met.",
+    href: "https://headway-peach.vercel.app",
+    tags: ["Data Engineering", "PostgreSQL", "FastAPI", "Live"],
+  },
   {
     name: "Verdict",
     summary:

@@ -28,6 +28,23 @@ const groundtruthData = [
   { analysis: 'Careful (20 wikis)', effect: 7.3, kind: 'careful' },
 ];
 
+// Headway -> how precisely an arrival can be timed, on two clocks.
+//
+// NO ACCURACY FIGURE APPEARS HERE. The pre-registration requires seven days of
+// ingestion and 20,000 matched predictions before any error number is
+// published, and a portfolio card is still publishing. What is charted is the
+// measurement finding M0 established: the bracket between the last observation
+// showing a train approaching and the first showing it stopped, on our polling
+// clock versus the MBTA feed's own timestamps. We poll every 4.2 seconds; the
+// feed refreshes about every 20. Precision is a property of the source, not of
+// the method -- an API key raises the request limit, not the refresh rate.
+const headwayData = [
+  { stat: 'Median', ours: 4.0, feed: 20.0 },
+  { stat: 'p75', ours: 4.0, feed: 32.0 },
+  { stat: 'p90', ours: 5.0, feed: 44.0 },
+  { stat: 'p99', ours: 7.0, feed: 145.0 },
+];
+
 // Verdict -> what peeking costs, measured on A/A tests where no effect exists.
 //
 // Real figures from the simulation the site runs in the browser: both arms have
@@ -164,6 +181,23 @@ type ProjectVisual = {
 //
 // Keyed by the project name in @/content/portfolio
 const projectVisuals: Record<string, ProjectVisual> = {
+  Headway: {
+    icon: Radar,
+    chart: (
+      <BarChart data={headwayData} margin={{ left: 10 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <XAxis dataKey="stat" stroke="#9ca3af" fontSize={12} />
+        <YAxis stroke="#9ca3af" unit="s"
+               label={{ value: 'Arrival bracket width', angle: -90, position: 'insideLeft', fill: '#9ca3af' }} />
+        <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
+        <Legend wrapperStyle={{ color: '#fff' }} />
+        <Bar dataKey="ours" name="Our polling (every 4.2s)" fill="#eab308" isAnimationActive={false} />
+        <Bar dataKey="feed" name="The feed's own timestamps" fill="#6b7280" isAnimationActive={false} />
+      </BarChart>
+    ),
+    insight:
+      "Millions of people act on transit arrival predictions, and the agency publishes its own error bar alongside each one. Nobody has ever checked either. Headway records the MBTA's predictions before the outcome exists, into a register the ingesting role cannot UPDATE or DELETE -- enforced by database grant and tested by attempting both -- then observes what actually happened. It is currently collecting, and deliberately publishes no accuracy figure: the pre-registration requires seven continuous days and 20,000 matched predictions, and that floor was fixed before any data existed. The chart is the finding M0 did establish, and it is the reason the project is trustworthy rather than merely built. An arrival is bracketed between the last observation showing a train approaching and the first showing it stopped; that bracket is 4 seconds wide on our polling clock and 20 on the feed's own, because we poll five times faster than the data actually changes. Precision is a property of the source, not of the method. That mattered: taking arrival as the first stopped observation takes the upper end of a 20-second bracket and overstates it by about ten seconds, which had produced a clean, plausible, entirely publishable finding that trains run systematically late. Switching to the bracket midpoint shrank it by three quarters. What was nearly published was mostly the observer.",
+  },
   Verdict: {
     icon: Activity,
     chart: (
