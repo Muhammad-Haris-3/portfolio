@@ -21,7 +21,7 @@ export const highlights = [
   },
   {
     label: "Projects",
-    value: "12",
+    value: "13",
     detail: "Analytics case studies, product builds, and portfolio work.",
   },
 ];
@@ -224,6 +224,13 @@ export const specializationCertificates = [
 ];
 
 export const projects = [
+  {
+    name: "Actuary",
+    summary:
+      "FEMA scores every US county for expected annual loss — $76.7bn nationally — and the figure directs grant money, while FEMA's own documentation says it is not meant to predict. This scores it against losses that arrived after the data that built it. Nearly a third of the index cannot be checked by anyone, and the obvious way to check the rest turns out to be measuring bureaucratic persistence.",
+    href: "https://actuary-ochre.vercel.app/",
+    tags: ["Model Validation", "Out-of-Sample", "FEMA · NOAA · NFIP", "Live"],
+  },
   {
     name: "Downfall",
     summary:

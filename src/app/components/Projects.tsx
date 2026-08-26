@@ -14,6 +14,22 @@ import { projects } from '@/content/portfolio';
 const tooltipStyle = { backgroundColor: '#000', border: '1px solid #eab308', borderRadius: '8px' };
 const tooltipLabelStyle = { color: '#fff' };
 
+// Actuary -> the same idea, scored two ways, and the ordering reverses.
+//
+// Real figures from data/m6/flood_two_instruments.csv. Riverine flood is the
+// only hazard measured by two independent record-keepers, and the two agree
+// with each other at only 0.401. The two naive rows are the SAME method --
+// extrapolate the last decade -- differing only in which record supplied that
+// decade. Tested on the record it came from, extrapolation beats the index
+// (0.676 vs 0.438). Drawn from the other record, it loses (0.284 vs 0.438).
+// The chart exists to show that a comparison can be decided by a methodological
+// choice rather than by the thing being compared, which is the project's finding.
+const actuaryData = [
+  { predictor: 'Index EAL', nfip: 0.438, noaa: 0.303, subject: true },
+  { predictor: 'Naive, same record', nfip: 0.676, noaa: 0.334, subject: false },
+  { predictor: 'Naive, other record', nfip: 0.284, noaa: 0.274, subject: false },
+];
+
 // Downfall -> how long an outage lasts, and why the collector cannot sample.
 //
 // Real figures from FINDINGS.md M0-T6: 3.0 hours of continuous collection on
@@ -198,6 +214,25 @@ type ProjectVisual = {
 //
 // Keyed by the project name in @/content/portfolio
 const projectVisuals: Record<string, ProjectVisual> = {
+  Actuary: {
+    icon: Target,
+    chart: (
+      <BarChart data={actuaryData} margin={{ left: 10, bottom: 4 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <XAxis dataKey="predictor" stroke="#9ca3af" fontSize={11} interval={0} />
+        <YAxis stroke="#9ca3af" domain={[0, 0.75]}
+               label={{ value: 'Rank correlation with realized loss', angle: -90, position: 'insideLeft', fill: '#9ca3af', fontSize: 11 }} />
+        <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
+        <Legend wrapperStyle={{ color: '#fff' }} />
+        <ReferenceLine y={0.401} stroke="#f87171" strokeDasharray="6 4"
+          label={{ value: 'The two records agree with each other at only 0.401', fill: '#f87171', fontSize: 11, position: 'insideTopRight' }} />
+        <Bar dataKey="nfip" name="Scored on insurance claims" fill="#eab308" isAnimationActive={false} />
+        <Bar dataKey="noaa" name="Scored on storm reports" fill="#6b7280" isAnimationActive={false} />
+      </BarChart>
+    ),
+    insight:
+      "FEMA publishes a dollar figure for every county's expected annual loss - $76.72bn nationally - and it feeds federal grant scoring and resilience-zone designations, while FEMA's own documentation states it is not meant to predict how much damage a community will experience. No published study appeared to have checked it. The first finding is that most of it cannot be checked at all: 29.15% of its dollar value is untestable, and earthquake alone is 27.04% - untestable twice over, because damaging earthquakes recur on century timescales and the national storm database does not record earthquakes in the first place. On the 70.86% that can be scored, across 439,152 storm events out-of-sample against a March 2023 index built from loss records ending in 2019, no hazard met the standard fixed before the data was downloaded; the best is tornado at 0.359 and two are negative. Splitting the question shows the index beats naive extrapolation at sizing a loss for 8 of 11 hazards but at locating one for only 4 - and locating is the entire judgement a funding decision consumes. The chart is the part that went against the project's own first answer. Extrapolating the past decade appeared to beat the index almost everywhere, and survived a reporting-quality control and a shorter window. Flood is the only hazard with two independent record-keepers, and they agree with each other at just 0.401. Tested on the record it was built from, extrapolation wins 0.676 to 0.438; drawn from the other record, it loses 0.284 to 0.438. The advantage was substantially each record's own persistence - a county with flood policies in force claims again in both decades - scored as skill. The pre-registration was committed before any data was downloaded and amended three times, each amendment stating what had been seen, with every superseded version left standing in git.",
+  },
   Downfall: {
     icon: Activity,
     chart: (
