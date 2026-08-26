@@ -14,6 +14,23 @@ import { projects } from '@/content/portfolio';
 const tooltipStyle = { backgroundColor: '#000', border: '1px solid #eab308', borderRadius: '8px' };
 const tooltipLabelStyle = { color: '#fff' };
 
+// Downfall -> how long an outage lasts, and why the collector cannot sample.
+//
+// Real figures from FINDINGS.md M0-T6: 3.0 hours of continuous collection on
+// Thursday 20 August, 15:50-18:50 New York time, 224 empty and 858 full
+// outages, durations estimated by Kaplan-Meier so the 30 empty and 177 full
+// outages still open when collection stopped count as at-least-this-long
+// rather than being discarded -- dropping them roughly halves the answer. The
+// reference line is the decision the table settles: a quarter of outages clear
+// inside five minutes, so a five-minute cron would blur one event in four.
+const downfallData = [
+  { quantile: '25th percentile', empty: 4.7, full: 5.3 },
+  { quantile: 'Median', empty: 9.9, full: 13.8 },
+  { quantile: '75th percentile', empty: 25.6, full: 47.8 },
+];
+
+const DOWNFALL_SAMPLING_INTERVAL = 5;
+
 // Groundtruth -> four answers to one question, and the wrong one wins.
 //
 // Real figures from results/comparison.json. The randomised trial found +16.9%
@@ -181,6 +198,25 @@ type ProjectVisual = {
 //
 // Keyed by the project name in @/content/portfolio
 const projectVisuals: Record<string, ProjectVisual> = {
+  Downfall: {
+    icon: Activity,
+    chart: (
+      <BarChart data={downfallData} margin={{ left: 10 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <XAxis dataKey="quantile" stroke="#9ca3af" fontSize={12} />
+        <YAxis stroke="#9ca3af" unit="m"
+               label={{ value: 'Outage duration (minutes)', angle: -90, position: 'insideLeft', fill: '#9ca3af' }} />
+        <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
+        <Legend wrapperStyle={{ color: '#fff' }} />
+        <ReferenceLine y={DOWNFALL_SAMPLING_INTERVAL} stroke="#f87171" strokeDasharray="6 4"
+          label={{ value: 'A 5-minute cron blurs everything below this', fill: '#f87171', fontSize: 12, position: 'insideTopRight' }} />
+        <Bar dataKey="empty" name="Empty docks (no bike to take)" fill="#eab308" isAnimationActive={false} />
+        <Bar dataKey="full" name="Full docks (nowhere to return one)" fill="#6b7280" isAnimationActive={false} />
+      </BarChart>
+    ),
+    insight:
+      "Every public analysis of bike-share data reads trips as demand. But an empty station records nothing: the people who arrive, find no bike and walk away leave no row anywhere. Rebalancing then sends bikes to the stations that look busy, the starved ones empty sooner and record even less, and the measurement causes the outcome it appears to describe. What makes this checkable rather than arguable is that some stations never run out -- for those, observed demand is true demand, so the estimator can be marked by hiding a never-empty station's data during the hours a comparable station was dark and seeing whether it recovers the number that was there all along. The deliverable is that error, not the demand figure. None is published yet: the coverage floor and the validation threshold were committed before the estimator existed, and no station is described as under-served until they are cleared. The chart is what M0 did settle, over 3 hours of continuous collection across 2,508 stations -- half of empty docks refill within 9.9 minutes and a quarter within 4.7, so a collector sampling every five minutes would miss about one outage in four, which is why it runs continuously between crons rather than on them. Kaplan-Meier rather than means, because the 30 outages still open at the end are disproportionately the long ones. Two bugs are recorded rather than quietly fixed: a three-minute test that wrote to twelve files dated across three months, because events were filed by the timestamp they carried instead of the day they were observed; and 283 of 287 outages already running at cold start, whose apparent start is a lower bound wearing a measurement's clothes and is now flagged and refused.",
+  },
   Headway: {
     icon: Radar,
     chart: (

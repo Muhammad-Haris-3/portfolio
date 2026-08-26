@@ -21,7 +21,7 @@ export const highlights = [
   },
   {
     label: "Projects",
-    value: "11",
+    value: "12",
     detail: "Analytics case studies, product builds, and portfolio work.",
   },
 ];
@@ -224,6 +224,13 @@ export const specializationCertificates = [
 ];
 
 export const projects = [
+  {
+    name: "Downfall",
+    summary:
+      "A station with no bikes records no demand, so the docks that fail most look like the docks nobody wants — and the data quietly recommends starving them further. Downfall watches all 2,508 New York bike-share stations, logs every stockout to an append-only register, and publishes no demand estimate until it has been marked against stations whose true demand was never hidden.",
+    href: "https://downfall-sigma.vercel.app",
+    tags: ["Censored Demand", "Survival Analysis", "GitHub Actions", "Live"],
+  },
   {
     name: "Headway",
     summary:
