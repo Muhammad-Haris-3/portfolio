@@ -225,6 +225,13 @@ export const specializationCertificates = [
 
 export const projects = [
   {
+    name: "Halflife",
+    summary:
+      "npm keeps the per-version download split for seven days and then deletes it, so whether a security advisory actually moves anyone off the versions it names cannot be answered with data that exists today — only by someone who started keeping the record first. Halflife polls 39,998 packages weekly into a public git history. The control arm it was pitched with turned out not to exist: advised versions run eight to twelve years old against controls aged in weeks, and comparing them would have returned a large clean result that was pure artefact.",
+    href: "https://github.com/Muhammad-Haris-3/Halflife",
+    tags: ["Event Study", "Pre-registered", "GitHub Actions", "Collecting"],
+  },
+  {
     name: "Actuary",
     summary:
       "FEMA scores every US county for expected annual loss — $76.7bn nationally — and the figure directs grant money, while FEMA's own documentation says it is not meant to predict. This scores it against losses that arrived after the data that built it. Nearly a third of the index cannot be checked by anyone, and the obvious way to check the rest turns out to be measuring bureaucratic persistence.",

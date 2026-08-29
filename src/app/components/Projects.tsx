@@ -47,6 +47,28 @@ const downfallData = [
 
 const DOWNFALL_SAMPLING_INTERVAL = 5;
 
+// Halflife -> the control arm that could not be built, which is the finding.
+// The pitch was to compare an advised version's decay against a version of the
+// same package that no advisory named. Measured across 14 packages, the advised
+// versions carry a median age of eight to twelve years and their would-be
+// controls a median age of weeks: advisories name RANGES, so on a mature package
+// nearly every old version is named by something and the untouched ones are the
+// recent ones. Comparing a decade-old version's decay against a three-week-old
+// version's growth returns a large, clean, entirely artefactual result - in
+// exactly the direction the project hoped to find. Age in days, log scale,
+// because a linear axis renders the control bars invisible.
+const halflifeData = [
+  { pkg: 'minimist', advised: 4399, control: 1416 },
+  { pkg: 'semver', advised: 4171, control: 840 },
+  { pkg: 'lodash', advised: 4113, control: 149 },
+  { pkg: 'js-yaml', advised: 4005, control: 20 },
+  { pkg: 'qs', advised: 3461, control: 103 },
+  { pkg: 'ws', advised: 3201, control: 44 },
+  { pkg: 'node-fetch', advised: 3112, control: 1322 },
+  { pkg: 'tar', advised: 2529, control: 37 },
+  { pkg: 'axios', advised: 1311, control: 70 },
+];
+
 // Groundtruth -> four answers to one question, and the wrong one wins.
 //
 // Real figures from results/comparison.json. The randomised trial found +16.9%
@@ -214,6 +236,26 @@ type ProjectVisual = {
 //
 // Keyed by the project name in @/content/portfolio
 const projectVisuals: Record<string, ProjectVisual> = {
+  Halflife: {
+    icon: TrendingUp,
+    chart: (
+      <BarChart data={halflifeData} margin={{ left: 10, bottom: 4 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <XAxis dataKey="pkg" stroke="#9ca3af" fontSize={11} interval={0} angle={-30} textAnchor="end" height={60} />
+        <YAxis stroke="#9ca3af" scale="log" domain={[10, 6000]} allowDataOverflow
+               ticks={[10, 100, 1000, 5000]}
+               label={{ value: 'Median version age at advisory (days, log)', angle: -90, position: 'insideLeft', fill: '#9ca3af', fontSize: 11 }} />
+        <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
+        <Legend wrapperStyle={{ color: '#fff' }} />
+        <ReferenceLine y={365} stroke="#f87171" strokeDasharray="6 4"
+          label={{ value: 'one year', fill: '#f87171', fontSize: 11, position: 'insideTopRight' }} />
+        <Bar dataKey="advised" name="Versions an advisory named" fill="#eab308" isAnimationActive={false} />
+        <Bar dataKey="control" name="Versions no advisory named (the proposed control)" fill="#6b7280" isAnimationActive={false} />
+      </BarChart>
+    ),
+    insight:
+      "npm publishes the per-version download split for a rolling seven days and archives nothing. The historical distribution is not inconvenient to obtain, it is unobtainable after the fact by anyone, npm included - so the question of whether a security advisory actually moves anyone off the versions it names cannot be answered with data that exists today. It can only be answered by someone who started keeping the record first. This is that register: 39,998 npm packages polled weekly, committed to a public git history so that what was written and when is verifiable by any reader rather than asserted. The chart is the design this project killed before collecting anything. The pitch was to compare an advised version's decay against a version of the same package that no advisory named, using background churn as the counterfactual. Measured across 14 packages, that control arm does not exist: advisories name ranges, so on a mature package nearly every old version is named by something and the versions left untouched are the recent ones. Advised versions run a median eight to twelve years old against controls aged in weeks, and only 3 of 14 packages had a single age-overlapping pair. Comparing a decade-old version's decay against a three-week-old version's growth would have produced a large, clean, entirely artefactual result - in precisely the direction the project hoped to find. The naive comparison does not fail loudly; it fails by returning the answer you wanted. The design that replaced it uses the same version before and after the advisory, an event study where each version is its own control. That requires exactly what npm destroys, which is why the collection had to start before the analysis could exist. Everything downstream is fixed in advance: admissibility, the parallel-trends gate, the horizons, and a kill condition stating the effect size below which the published finding is that advisories do not move adoption at all. Two arithmetic errors in the storage plan and a rate limit that behaves per-IP rather than per-request were all caught by measuring rather than assuming - the frame is polled by eight sharded runners at 4.02 requests a second because one runner is refused above 0.5. No figure will be published until a threshold fixed before the first snapshot is met.",
+  },
   Actuary: {
     icon: Target,
     chart: (
