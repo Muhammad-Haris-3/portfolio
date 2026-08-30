@@ -225,6 +225,13 @@ export const specializationCertificates = [
 
 export const projects = [
   {
+    name: "Embargo",
+    summary:
+      "A finished trial's results are not published when the sponsor submits them — they enter a quality-control review, and until it ends the registry shows nothing at all, so a result sitting in the queue is indistinguishable from one that was never reported. Embargo measures the wait nobody had put together (median 81 days; 13.6% exceed a year, across 26,984 of them) and estimates how many results are unreadable right now. Its estimator failed the check fixed in advance, missing by up to 90% against a 10% tolerance — so the site publishes no queue figure at all, and names the check that stopped it.",
+    href: "https://embargo-silk.vercel.app",
+    tags: ["Right-Truncated Data", "Pre-registered", "PostgreSQL", "Live"],
+  },
+  {
     name: "Halflife",
     summary:
       "npm keeps the per-version download split for seven days and then deletes it, so whether a security advisory actually moves anyone off the versions it names cannot be answered with data that exists today — only by someone who started keeping the record first. Halflife polls 39,998 packages weekly into a public git history. The control arm it was pitched with turned out not to exist: advised versions run eight to twelve years old against controls aged in weeks, and comparing them would have returned a large clean result that was pure artefact.",
