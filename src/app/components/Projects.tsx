@@ -14,6 +14,26 @@ import { projects } from '@/content/portfolio';
 const tooltipStyle = { backgroundColor: '#000', border: '1px solid #eab308', borderRadius: '8px' };
 const tooltipLabelStyle = { color: '#fff' };
 
+// Sawtooth -> why the pre-registered claim came back null.
+//
+// Each bar is one "shape" feature built from daily timecards, plotted against
+// its largest absolute correlation with a plain staffing level. Three of the
+// six are near-restatements of the average they were supposed to beat: a
+// facility's 10th-percentile day correlates 0.955 with its quarterly mean and
+// 0.958 with its weekend mean. The floor and the level are the same number.
+//
+// Only the two agency features are genuinely independent of level - and they
+// were not enough to move held-out AUC past the pre-registered threshold.
+// Figures from analysis/diagnostics.json in Muhammad-Haris-3/Sawtooth.
+const sawtoothData = [
+  { feature: 'floor (p10)',   redundant: 0.958, independent: null },
+  { feature: 'thin days',     redundant: 0.758, independent: null },
+  { feature: 'long streak',   redundant: 0.599, independent: null },
+  { feature: 'volatility',    redundant: null,  independent: 0.178 },
+  { feature: 'agency swing',  redundant: null,  independent: 0.036 },
+  { feature: 'agency share',  redundant: null,  independent: 0.017 },
+];
+
 // Actuary -> the same idea, scored two ways, and the ordering reverses.
 //
 // Real figures from data/m6/flood_two_instruments.csv. Riverine flood is the
@@ -236,6 +256,25 @@ type ProjectVisual = {
 //
 // Keyed by the project name in @/content/portfolio
 const projectVisuals: Record<string, ProjectVisual> = {
+  Sawtooth: {
+    icon: Activity,
+    chart: (
+      <BarChart data={sawtoothData} margin={{ left: 10, bottom: 4 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <XAxis dataKey="feature" stroke="#9ca3af" fontSize={11} interval={0} angle={-30} textAnchor="end" height={60} />
+        <YAxis stroke="#9ca3af" domain={[0, 1]} ticks={[0, 0.25, 0.5, 0.75, 1]}
+               label={{ value: 'Correlation with a plain staffing level', angle: -90, position: 'insideLeft', fill: '#9ca3af', fontSize: 11 }} />
+        <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
+        <Legend wrapperStyle={{ color: '#fff' }} />
+        <ReferenceLine y={0.955} stroke="#f87171" strokeDasharray="6 4"
+          label={{ value: 'the floor IS the average (r = 0.955)', fill: '#f87171', fontSize: 11, position: 'insideTopRight' }} />
+        <Bar dataKey="redundant" name="Already contained in the average" fill="#eab308" isAnimationActive={false} />
+        <Bar dataKey="independent" name="Genuinely new information" fill="#6b7280" isAnimationActive={false} />
+      </BarChart>
+    ),
+    insight:
+      "Medicare grades every nursing home in America on a 1-5 star scale built largely from a quarterly average of nurse hours per resident day. An average is a lossy summary, so the suspicion writes itself: a facility could post a respectable quarterly number while running skeleton crews every Sunday, swinging wildly day to day, or backfilling shifts with agency temps who have never met the residents. On paper it looks safe; in the building on a Tuesday in February it is not. The weekend drop is real - across 1,301,313 facility-days at 14,483 facilities, Sunday runs 7.2% below the weekday average, every week, all year. Testing whether that hidden shape predicts actual patient harm meant building the record first: 37 quarters of raw CMS Payroll-Based Journal timecards, 49,202,720 facility-days, 1.16 GB of Parquet queried through DuckDB, past three separate file-naming conventions, eight drifting column names, files that are cp1252 rather than UTF-8 (360 rows out of 1.3M abort a strict read of the whole file), and a quality flag CMS published for exactly one quarter and never again. The claim was then committed to git - threshold, confidence-interval rule, power floor and a promise to publish either way - the day before the model ran. It failed. On 20,543 held-out inspections containing 2,358 harm citations, adding every distributional feature moved discrimination by 0.0054 against a pre-registered 0.03, with an interval across zero. This chart is why. Three of the six features were elaborate restatements of the average they were meant to beat: the 10th-percentile day correlates 0.955 with the quarterly mean. Facilities are far more consistent week to week than the hidden-catastrophe story assumes, so there was never anything for the daily data to add. Two further things surfaced. Staffing in any measured form predicts a harm citation barely better than the base rate - baseline AUC 0.6118, and bed count is a more reliably significant predictor than any staffing metric, which is either a mechanical size effect or evidence that inspections are a noisy instrument. And the only features orthogonal to level, both about agency staffing, did carry a significant in-sample signal. The tempting move was to delete the pre-registration, rewrite the hypothesis as 'agency volatility predicts harm', and publish that as the win. The pre-registration, the amendment recording a leakage error caught in our own baseline, and the null are all still in the repository.",
+  },
   Halflife: {
     icon: TrendingUp,
     chart: (

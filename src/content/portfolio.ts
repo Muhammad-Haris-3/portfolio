@@ -225,6 +225,13 @@ export const specializationCertificates = [
 
 export const projects = [
   {
+    name: "Sawtooth",
+    summary:
+      "Medicare grades every nursing home on a quarterly average of nurse staffing, and an average is a lossy summary — so a home could post a respectable number while running skeleton crews every Sunday. Sawtooth tested that against 49.2 million daily timecards and 20,543 held-out inspections, with the decision rule committed to git the day before the model ran. It came back null: ΔAUC +0.0054 against a pre-registered 0.03, interval across zero. The reason is the finding — a facility's 10th-percentile staffing day correlates 0.955 with its quarterly mean, so the floor and the level are the same number and there was never anything for the daily data to add. A significant agency-staffing signal turned up while examining the wreckage; it is published as a hypothesis for someone else to pre-register rather than rewritten into the win.",
+    href: "https://sawtooth-henna.vercel.app",
+    tags: ["Pre-registered", "Null Result", "DuckDB", "Live"],
+  },
+  {
     name: "Embargo",
     summary:
       "A finished trial's results are not published when the sponsor submits them — they enter a quality-control review, and until it ends the registry shows nothing at all, so a result sitting in the queue is indistinguishable from one that was never reported. Embargo measures the wait nobody had put together (median 81 days; 13.6% exceed a year, across 26,984 of them) and estimates how many results are unreadable right now. Its estimator failed the check fixed in advance, missing by up to 90% against a 10% tolerance — so the site publishes no queue figure at all, and names the check that stopped it.",
