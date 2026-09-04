@@ -86,13 +86,13 @@ export const specializationCertificates = [
     name: "Oracle Cloud Infrastructure AI Foundations",
     issuer: "Oracle",
     status: "Completed",
-    href: "/oracle-cloud-infrastructure-ai-foundations.pdf",
+    href: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=81FD05025F55CC160D60299D2B1B1AFA35ABAF25066A9F5986C93CBECD64EA08",
     summary:
       "Oracle Cloud Infrastructure AI Foundations certification covering core OCI concepts and AI fundamentals.",
     courses: [
       {
         name: "Oracle Cloud Infrastructure AI Foundations",
-        href: "/oracle-cloud-infrastructure-ai-foundations.pdf",
+        href: "https://catalog-education.oracle.com/pls/certview/sharebadge?id=81FD05025F55CC160D60299D2B1B1AFA35ABAF25066A9F5986C93CBECD64EA08",
       },
     ],
   },
