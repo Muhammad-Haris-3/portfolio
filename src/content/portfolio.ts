@@ -5,7 +5,7 @@ export const profile = {
   intro:
     "I focus on turning data into clear insights and practical decisions. This portfolio brings together my education, certifications, projects, and contact details in a clean format that is easy to scan and easy to grow.",
   currentlyWorkingOn:
-    "Completing the Advanced Data Analytics specialization and building more projects around analytics, Python, and data storytelling.",
+    "Building analytics projects around measurement, causal inference, and forecast evaluation - and looking for my first full-time data role.",
 };
 
 export const highlights = [
@@ -21,7 +21,7 @@ export const highlights = [
   },
   {
     label: "Projects",
-    value: "13",
+    value: "16",
     detail: "Analytics case studies, product builds, and portfolio work.",
   },
 ];
@@ -30,9 +30,9 @@ export const education = [
   {
     school: "Bahauddin Zakariya University, Multan",
     period: "2022 - 2026",
-    degree: "University education",
+    degree: "BS Computer Science",
     summary:
-      "Studying and building a foundation for data analysis, problem solving, and applied technology work.",
+      "Graduated in 2026, having built the foundation for data analysis, problem solving, and applied technology work.",
   },
   {
     school: "KIPS College, Multan",
