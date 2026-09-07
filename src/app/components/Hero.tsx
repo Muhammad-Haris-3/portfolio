@@ -88,7 +88,7 @@ export function Hero() {
               <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
             </button>
             <a
-              href="/resume.pdf"
+              href="/cv.html"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-transparent text-yellow-500 border border-yellow-500/40 font-semibold rounded-full hover:bg-yellow-500/10 hover:border-yellow-500 transition-all hover:scale-105 inline-flex items-center gap-2"
