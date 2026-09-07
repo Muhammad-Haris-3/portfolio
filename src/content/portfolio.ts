@@ -221,6 +221,15 @@ export const specializationCertificates = [
       },
     ],
   },
+  {
+    name: "Data Fundamentals",
+    issuer: "IBM SkillsBuild",
+    status: "Completed",
+    href: "https://skills.yourlearning.ibm.com/certificate/share/9118dfc092ewogICJsZWFybmVyQ05VTSIgOiAiODgzMTMyN1JFRyIsCiAgIm9iamVjdElkIiA6ICJQTEFOLUJDMEZBRUU4RTQzOSIsCiAgIm9iamVjdFR5cGUiIDogIkFDVElWSVRZIgp97c8625d902-10",
+    summary:
+      "IBM SkillsBuild credential covering data fundamentals — how data is collected, structured, and turned into analysis.",
+    courses: [],
+  },
 ];
 
 export const projects = [
