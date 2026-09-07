@@ -1,4 +1,13 @@
 <!doctype html>
+<!--
+  After editing this file, regenerate public/cv.pdf so the download stays in sync:
+
+  "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless --disable-gpu \
+    --no-pdf-header-footer --print-to-pdf="E:\projects\portfolio\public\cv.pdf" \
+    "file:///E:/projects/portfolio/public/cv.html"
+
+  Output must stay at one A4 page.
+-->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -104,15 +113,44 @@
   .certs { font-size: 9.2pt; }
   .certs b { color: var(--ink); font-weight: 600; }
 
+  .actions {
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 10px 14mm 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .actions a, .actions button {
+    font: inherit;
+    font-size: 9pt;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--rule);
+    background: #fff;
+    color: var(--ink);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .actions a:hover, .actions button:hover { border-color: var(--accent); color: var(--accent); }
+
   @page { size: A4; margin: 12mm; }
   @media print {
     body { background: #fff; font-size: 9.1pt; }
     .page { padding: 0; max-width: none; }
+    .actions { display: none; }
     a { color: inherit; }
   }
 </style>
 </head>
 <body>
+
+<div class="actions">
+  <a href="/cv.pdf" download="Muhammad-Haris-CV.pdf">Download PDF</a>
+  <button onclick="window.print()">Print</button>
+</div>
+
 <main class="page">
 
   <header>
