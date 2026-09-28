@@ -103,6 +103,21 @@ const groundtruthData = [
   { analysis: 'Careful (20 wikis)', effect: 7.3, kind: 'careful' },
 ];
 
+// Endpoint -> the "switching" rate is the reporting rate, measured twice.
+//
+// From FINDINGS.md F6, by lead sponsor: the share of trials that posted no
+// results, beside the share flagged as changing their primary outcome after the
+// data was in. The sponsors who report best appear to switch most, in near-exact
+// rank order, because a trial that posts results has far more registry edits to
+// flag. The 19.9% headline is not charted on its own for that reason.
+const endpointData = [
+  { sponsor: 'NIH', silent: 27.7, switching: 56.1 },
+  { sponsor: 'Federal', silent: 35.7, switching: 39.5 },
+  { sponsor: 'Industry', silent: 52.8, switching: 32.6 },
+  { sponsor: 'Academic', silent: 79.8, switching: 14.7 },
+  { sponsor: 'Other gov.', silent: 96.2, switching: 7.8 },
+];
+
 // Headway -> how precisely an arrival can be timed, on two clocks.
 //
 // NO ACCURACY FIGURE APPEARS HERE. The pre-registration requires seven days of
@@ -401,6 +416,23 @@ const projectVisuals: Record<string, ProjectVisual> = {
     ),
     insight:
       "A hospital can follow up with a few hundred discharged patients a month, so the only question that matters is which few hundred. Measured on 19,765 held-out discharges, ranking by one integer already in the record - how many times the patient was admitted in the past year - catches 88.9 of the 200 called. An untuned gradient-boosted model given all 41 fields catches 94.0: a lift of 1.06x whose 95% bootstrap interval, resampled at patient level, runs [0.92, 1.23] and therefore includes 1.0. The kill criterion for exactly that outcome was written into the specification before any data was loaded, and it fired. One declared retry adding diagnosis codes made it worse in the way that matters most: AUC rose from 0.6680 to 0.6731 while the patients actually reached fell from 94 to 84. An analyst following the metric the literature reports would have shipped the richer model and reached ten fewer of the people who came back. The deployed site serves its call list from prior admissions, never from the model, and shows the model only alongside the interval that disqualifies it.",
+  },
+  Endpoint: {
+    icon: Activity,
+    chart: (
+      <BarChart data={endpointData} margin={{ left: 10 }}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+        <XAxis dataKey="sponsor" stroke="#9ca3af" fontSize={12} />
+        <YAxis stroke="#9ca3af" unit="%" domain={[0, 100]}
+               label={{ value: 'Share of trials', angle: -90, position: 'insideLeft', fill: '#9ca3af' }} />
+        <Tooltip contentStyle={tooltipStyle} labelStyle={tooltipLabelStyle} />
+        <Legend wrapperStyle={{ color: '#fff' }} />
+        <Bar dataKey="silent" name="Posted no results" fill="#6b7280" isAnimationActive={false} />
+        <Bar dataKey="switching" name="Flagged as switching outcome" fill="#eab308" isAnimationActive={false} />
+      </BarChart>
+    ),
+    insight:
+      "Every clinical trial registers the outcome it will measure before it enrols anyone, and ClinicalTrials.gov keeps every dated edit. Endpoint crawled the full version history of all 126,760 completed interventional trials — 126,760 of 126,760 histories and 54,203 of 54,203 version pairs, zero failures — against rules hashed and sealed before collection. 72.2% never posted results. 25,187 trials, 19.9%, changed their primary outcome after they could see the answer, and the chart is why that number cannot be read as switching. Trials that posted results are flagged at 59.0%; trials that posted nothing, at 4.8% — a 12-fold gap, because reporting results is what generates the registry edits being flagged. Broken out by sponsor it becomes a near-perfect inversion: NIH reports best and looks worst, other government sponsors report worst and look best. It is the reporting rate, measured twice. Four separate times a headline figure turned out to be substantially an artefact, and each time the project recorded the artefact instead of shipping the number.",
   },
   Groundtruth: {
     icon: Target,
