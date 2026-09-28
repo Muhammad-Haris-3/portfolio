@@ -255,6 +255,13 @@ export const projects = [
     tags: ["Event Study", "Pre-registered", "GitHub Actions", "Collecting"],
   },
   {
+    name: "Endpoint",
+    summary:
+      "Every clinical trial declares what it will measure before enrolling anyone, and ClinicalTrials.gov keeps every dated edit to that promise — but nobody had checked the whole registry for edits made after the data was in. Endpoint crawled the full version history of all 126,760 completed interventional trials. 72.2% never posted results. 19.9% changed their promised outcome after they could see the answer, and the project's main finding is why that number cannot be read as switching: trials that posted results are flagged 12 times as often as trials that posted nothing, so the sponsors who report best look like the worst offenders. It is the reporting rate, measured twice.",
+    href: "https://muhammad-haris-3.github.io/Endpoint/",
+    tags: ["Research Integrity", "Pre-registered", "ClinicalTrials.gov", "Live"],
+  },
+  {
     name: "Downwind",
     summary:
       "Punjab triggers school closures and smog emergencies on one air quality number per district, and for 26 of its 35 covered districts that number comes from a single instrument. Where it can be checked, the assumption does not hold well: on the first day of observation Lahore's ten stations disagreed by 78 AQI points — three health categories at once. Downwind records what the network says, and what it fails to say, continuously on GitHub Actions, and publishes nothing until 60 days and 150,000 station-hours fixed in advance are met.",
