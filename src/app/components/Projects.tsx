@@ -545,7 +545,7 @@ const projectVisuals: Record<string, ProjectVisual> = {
       </BarChart>
     ),
     insight:
-      "Upload a CSV and the pipeline runs quality checks, exploratory analysis, auto-selected statistical tests (t-test, ANOVA, chi-square) and a random-forest baseline on an 80/20 split, then surfaces feature importance plus a live what-if prediction simulator and a PDF report. Next.js front end, FastAPI back end, 153 automated tests across both layers.",
+      "Upload a CSV and the pipeline runs quality checks, exploratory analysis, auto-selected statistical tests (t-test, ANOVA, chi-square) and a random-forest baseline on an 80/20 split, then surfaces feature importance plus a live what-if prediction simulator and a PDF report. Next.js front end, FastAPI back end, 203 automated tests across both layers.",
   },
   "Portfolio Project": {
     icon: PieIcon,

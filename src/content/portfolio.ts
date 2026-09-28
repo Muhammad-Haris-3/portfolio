@@ -255,6 +255,13 @@ export const projects = [
     tags: ["Event Study", "Pre-registered", "GitHub Actions", "Collecting"],
   },
   {
+    name: "Downwind",
+    summary:
+      "Punjab triggers school closures and smog emergencies on one air quality number per district, and for 26 of its 35 covered districts that number comes from a single instrument. Where it can be checked, the assumption does not hold well: on the first day of observation Lahore's ten stations disagreed by 78 AQI points — three health categories at once. Downwind records what the network says, and what it fails to say, continuously on GitHub Actions, and publishes nothing until 60 days and 150,000 station-hours fixed in advance are met.",
+    href: "https://github.com/Muhammad-Haris-3/Downwind",
+    tags: ["Air Quality", "Pre-registered", "GitHub Actions", "Collecting"],
+  },
+  {
     name: "Actuary",
     summary:
       "FEMA scores every US county for expected annual loss — $76.7bn nationally — and the figure directs grant money, while FEMA's own documentation says it is not meant to predict. This scores it against losses that arrived after the data that built it. Nearly a third of the index cannot be checked by anyone, and the obvious way to check the rest turns out to be measuring bureaucratic persistence.",
@@ -334,7 +341,7 @@ export const projects = [
   {
     name: "InsightForge",
     summary:
-      "A no-code analytics platform: upload a CSV and get quality checks, statistical tests, a predictive model, and a downloadable PDF report — backed by 153 automated tests across both layers.",
+      "A no-code analytics platform: upload a CSV and get quality checks, statistical tests, a predictive model, and a downloadable PDF report — backed by 203 automated tests across both layers.",
     href: "https://insight-forge-beta.vercel.app",
     tags: ["Next.js", "FastAPI", "scikit-learn", "Live"],
   },
