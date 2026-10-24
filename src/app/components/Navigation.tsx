@@ -28,14 +28,14 @@ export function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-black/95 backdrop-blur-lg shadow-lg shadow-yellow-500/10 border-b border-yellow-500/20 py-3" : "bg-black/80 backdrop-blur-sm py-4"}`}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between">
           <div
             className="flex items-center gap-2 cursor-pointer"
             onClick={() => scrollToSection("#home")}
           >
-            <BarChart3 className="w-8 h-8 text-yellow-500 drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]" />
-            <span className="text-xl font-bold tracking-tight text-white uppercase">
+            <BarChart3 className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 text-yellow-500 drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]" />
+            <span className="text-base sm:text-xl font-bold tracking-tight text-white uppercase">
               Muhammad Haris
             </span>
           </div>

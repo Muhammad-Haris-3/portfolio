@@ -11,22 +11,22 @@ const categoryIconMap: Record<string, any> = {
 
 export function Skills() {
   return (
-    <section id="skills" className="py-20 px-6 bg-gradient-to-b from-black via-gray-900 to-black relative">
+    <section id="skills" className="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-black via-gray-900 to-black relative">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(234,179,8,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(234,179,8,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
       
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-4 text-white">Technical Skills</h2>
+        <div className="text-center mb-10 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">Technical Skills</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-4"></div>
-          <p className="text-xl text-gray-400">Tools, languages, and methodologies I leverage daily</p>
+          <p className="text-base sm:text-xl text-gray-400">Tools, languages, and methodologies I leverage daily</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {skills.map((category, index) => {
             const Icon = categoryIconMap[category.category] || BarChart3;
             return (
               <div 
                 key={category.category} 
-                className="p-8 bg-gradient-to-br from-gray-900 to-black border border-yellow-500/20 rounded-xl hover:shadow-2xl hover:shadow-yellow-500/10 hover:border-yellow-500/40 transition-all hover:scale-105 group text-left"
+                className="p-6 sm:p-8 bg-gradient-to-br from-gray-900 to-black border border-yellow-500/20 rounded-xl hover:shadow-2xl hover:shadow-yellow-500/10 hover:border-yellow-500/40 transition-all sm:hover:scale-105 group text-left"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-center gap-4 mb-6">

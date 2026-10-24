@@ -15,13 +15,13 @@ export const highlights = [
     detail: "University, college, and school milestones.",
   },
   {
-    label: "Coursera Tracks",
-    value: "2",
-    detail: "Google Data Analytics and Advanced Data Analytics.",
+    label: "Certifications",
+    value: "7",
+    detail: "Google, Oracle, IBM, Forage, and eHunar credentials.",
   },
   {
     label: "Projects",
-    value: "16",
+    value: "18",
     detail: "Analytics case studies, product builds, and portfolio work.",
   },
 ];

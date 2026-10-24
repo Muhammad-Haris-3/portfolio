@@ -38,24 +38,24 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 px-6 bg-gradient-to-b from-black to-gray-900 text-white relative overflow-hidden"
+      className="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-black to-gray-900 text-white relative overflow-hidden"
     >
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl"></div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-4">Get In Touch</h2>
+        <div className="text-center mb-10 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Get In Touch</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-4"></div>
-          <p className="text-xl text-gray-400">
+          <p className="text-base sm:text-xl text-gray-400">
             Let's discuss how data can drive your business forward
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 text-left">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 text-left">
           <div className="space-y-8">
             <div>
-              <h3 className="text-2xl font-bold mb-6 text-white">
+              <h3 className="text-xl sm:text-2xl font-bold mb-6 text-white">
                 Contact Information
               </h3>
               <div className="space-y-4">
@@ -70,7 +70,7 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-400 font-semibold">Email</p>
-                    <p className="text-white group-hover:text-yellow-500 transition-colors font-medium">
+                    <p className="text-white group-hover:text-yellow-500 transition-colors font-medium break-all">
                       {emailVal}
                     </p>
                   </div>
@@ -134,7 +134,7 @@ export function Contact() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-8 border border-yellow-500/30 shadow-2xl shadow-yellow-500/10">
+          <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl p-5 sm:p-8 border border-yellow-500/30 shadow-2xl shadow-yellow-500/10">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label

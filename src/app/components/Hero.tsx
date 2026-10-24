@@ -18,7 +18,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center bg-black px-6 relative overflow-hidden pt-24 md:pt-0"
+      className="min-h-screen flex items-center justify-center bg-black px-4 sm:px-6 relative overflow-hidden pt-24 md:pt-0"
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -29,7 +29,7 @@ export function Hero() {
         ></div>
       </div>
 
-      <div className="max-w-6xl w-full grid md:grid-cols-2 gap-12 items-center relative z-10 py-12">
+      <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10 md:gap-12 items-center relative z-10 py-12">
         <div className="space-y-6 text-left">
           <div className="space-y-2">
             <p className="text-yellow-500 uppercase tracking-widest text-sm font-semibold flex items-center gap-2">
@@ -79,10 +79,10 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="flex flex-wrap gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
             <button
               onClick={() => scrollToSection("projects")}
-              className="px-8 py-4 bg-gradient-to-r from-yellow-500 to-yellow-400 text-black font-semibold rounded-full hover:shadow-2xl hover:shadow-yellow-500/50 transition-all hover:scale-105 inline-flex items-center gap-2 group cursor-pointer"
+              className="px-8 py-4 bg-gradient-to-r from-yellow-500 to-yellow-400 text-black font-semibold rounded-full hover:shadow-2xl hover:shadow-yellow-500/50 transition-all sm:hover:scale-105 inline-flex items-center justify-center gap-2 group cursor-pointer"
             >
               View Projects
               <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
@@ -91,7 +91,7 @@ export function Hero() {
               href="/cv.html"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-transparent text-yellow-500 border border-yellow-500/40 font-semibold rounded-full hover:bg-yellow-500/10 hover:border-yellow-500 transition-all hover:scale-105 inline-flex items-center gap-2"
+              className="px-8 py-4 bg-transparent text-yellow-500 border border-yellow-500/40 font-semibold rounded-full hover:bg-yellow-500/10 hover:border-yellow-500 transition-all sm:hover:scale-105 inline-flex items-center justify-center gap-2"
             >
               View Resume
               <FileText className="w-4 h-4" />

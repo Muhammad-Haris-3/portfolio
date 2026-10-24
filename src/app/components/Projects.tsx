@@ -8,7 +8,7 @@ import {
   XAxis, YAxis, CartesianGrid, ReferenceLine,
   Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
-import { ExternalLink, BarChart3, PieChart as PieIcon, TrendingUp, Activity, Zap, Radar, Target, type LucideIcon } from 'lucide-react';
+import { ExternalLink, ChevronDown, BarChart3, PieChart as PieIcon, TrendingUp, Activity, Zap, Radar, Target, type LucideIcon } from 'lucide-react';
 import { projects } from '@/content/portfolio';
 
 const tooltipStyle = { backgroundColor: '#000', border: '1px solid #eab308', borderRadius: '8px' };
@@ -606,80 +606,117 @@ const projectVisuals: Record<string, ProjectVisual> = {
   },
 };
 
+// Cards start collapsed: name and tags only. Summary, chart and insight live
+// behind "See more", and everything past the first few behind "See all".
+const FEATURED_COUNT = 4;
+
 // Dynamic client rendering safe wrapper to prevent SSR hydration mismatches
 export function Projects() {
   const [mounted, setMounted] = useState(false);
+  const [openName, setOpenName] = useState<string | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  const visible = showAll ? projects : projects.slice(0, FEATURED_COUNT);
+
   return (
-    <section id="projects" className="py-20 px-6 bg-black relative">
+    <section id="projects" className="py-16 sm:py-20 px-4 sm:px-6 bg-black relative">
       <div className="absolute top-0 left-1/2 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl"></div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold mb-4 text-white">Featured Projects</h2>
+        <div className="text-center mb-10 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">Featured Projects</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-yellow-500 to-transparent mx-auto mb-4"></div>
-          <p className="text-xl text-gray-400">Interactive data visualizations representing projects and research</p>
+          <p className="text-base sm:text-xl text-gray-400">Open a project for the write-up and its chart</p>
         </div>
 
-        <div className="space-y-16">
-          {projects.map((project) => {
+        <div className="space-y-6">
+          {visible.map((project) => {
             const visual = projectVisuals[project.name];
             const Icon = visual?.icon ?? BarChart3;
+            const isOpen = openName === project.name;
 
             return (
-              <div key={project.name} className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl shadow-yellow-500/10 p-6 md:p-8 border border-yellow-500/20 hover:border-yellow-500/40 transition-all hover:scale-[1.01] group text-left">
-                <div className="mb-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-3xl font-bold text-white group-hover:text-yellow-500 transition-colors">{project.name}</h3>
-                      <p className="text-gray-400 mt-2">{project.summary}</p>
-                    </div>
-                    <a
-                      href={project.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 hover:bg-yellow-500/10 rounded-lg transition-colors border border-yellow-500/30 flex items-center justify-center flex-shrink-0"
-                    >
-                      <ExternalLink className="w-5 h-5 text-yellow-500" />
-                    </a>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="px-3 py-1 bg-yellow-500/10 text-yellow-500 rounded-full text-xs font-semibold border border-yellow-500/30">{tag}</span>
-                    ))}
-                  </div>
+              <div key={project.name} className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl shadow-yellow-500/10 p-5 sm:p-6 md:p-8 border border-yellow-500/20 hover:border-yellow-500/40 transition-colors group text-left">
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-yellow-500 transition-colors">{project.name}</h3>
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open ${project.name}`}
+                    className="p-3 hover:bg-yellow-500/10 rounded-lg transition-colors border border-yellow-500/30 flex items-center justify-center flex-shrink-0"
+                  >
+                    <ExternalLink className="w-5 h-5 text-yellow-500" />
+                  </a>
                 </div>
 
-                {visual && (
-                  <>
-                    {/* Chart */}
-                    <div className="h-80 bg-black/50 rounded-xl p-4 border border-yellow-500/10 flex items-center justify-center">
-                      {mounted ? (
-                        <ResponsiveContainer width="100%" height="100%">
-                          {visual.chart}
-                        </ResponsiveContainer>
-                      ) : (
-                        <div className="text-gray-500 flex items-center gap-2">
-                          <Icon className="animate-pulse w-5 h-5" /> Loading Analytics Visuals...
-                        </div>
-                      )}
-                    </div>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="px-3 py-1 bg-yellow-500/10 text-yellow-500 rounded-full text-xs font-semibold border border-yellow-500/30">{tag}</span>
+                  ))}
+                </div>
 
-                    <div className="mt-6 p-4 bg-yellow-500/5 rounded-lg border border-yellow-500/20">
-                      <p className="text-sm text-gray-300">
-                        <strong className="text-yellow-500">Analytics Summary:</strong> {visual.insight}
-                      </p>
-                    </div>
+                <button
+                  type="button"
+                  onClick={() => setOpenName(isOpen ? null : project.name)}
+                  aria-expanded={isOpen}
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-yellow-500 hover:text-yellow-400 transition-colors cursor-pointer"
+                >
+                  {isOpen ? "See less" : "See more"}
+                  <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                </button>
+
+                {isOpen && (
+                  <>
+                    <p className="text-gray-400 mt-5">{project.summary}</p>
+
+                    {visual && (
+                      <>
+                        {/* Chart */}
+                        <div className="h-64 sm:h-80 bg-black/50 rounded-xl p-2 sm:p-4 border border-yellow-500/10 flex items-center justify-center mt-6">
+                          {mounted ? (
+                            <ResponsiveContainer width="100%" height="100%">
+                              {visual.chart}
+                            </ResponsiveContainer>
+                          ) : (
+                            <div className="text-gray-500 flex items-center gap-2">
+                              <Icon className="animate-pulse w-5 h-5" /> Loading Analytics Visuals...
+                            </div>
+                          )}
+                        </div>
+
+                        <div className="mt-6 p-4 bg-yellow-500/5 rounded-lg border border-yellow-500/20">
+                          <p className="text-sm text-gray-300">
+                            <strong className="text-yellow-500">Analytics Summary:</strong> {visual.insight}
+                          </p>
+                        </div>
+                      </>
+                    )}
                   </>
                 )}
               </div>
             );
           })}
         </div>
+
+        {projects.length > FEATURED_COUNT && (
+          <div className="text-center mt-12">
+            <button
+              type="button"
+              onClick={() => {
+                if (showAll) setOpenName(null);
+                setShowAll(!showAll);
+              }}
+              className="w-full sm:w-auto px-8 py-3.5 rounded-full border border-yellow-500/40 text-yellow-500 font-semibold hover:bg-yellow-500/10 hover:border-yellow-500 transition-colors cursor-pointer"
+            >
+              {showAll ? `Show fewer` : `See all ${projects.length} projects`}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
