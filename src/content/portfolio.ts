@@ -21,7 +21,7 @@ export const highlights = [
   },
   {
     label: "Projects",
-    value: "18",
+    value: "21",
     detail: "Analytics case studies, product builds, and portfolio work.",
   },
 ];
@@ -274,6 +274,27 @@ export const projects = [
       "FEMA scores every US county for expected annual loss — $76.7bn nationally — and the figure directs grant money, while FEMA's own documentation says it is not meant to predict. This scores it against losses that arrived after the data that built it. Nearly a third of the index cannot be checked by anyone, and the obvious way to check the rest turns out to be measuring bureaucratic persistence.",
     href: "https://actuary-ochre.vercel.app/",
     tags: ["Model Validation", "Out-of-Sample", "FEMA · NOAA · NFIP", "Live"],
+  },
+  {
+    name: "Tally",
+    summary:
+      "Pakistan's Finance Ministry publishes a CPI inflation forecast every month, and nobody keeps score. Tally scored 57 months of them under a pre-registered test: the Ministry's mean absolute error is 1.40 points against 1.32 for a seasonal rule anyone could compute from last year's prices (Diebold–Mariano p = 0.50), and the actual figure lands inside its stated range one month in three. Since October 2026 a free GitHub Actions job collects weekly prices twice a day and issues Tally's own forecast before each release.",
+    href: "https://github.com/Muhammad-Haris-3/Tally",
+    tags: ["Forecast Evaluation", "Pre-registered", "Pakistan CPI", "GitHub Actions"],
+  },
+  {
+    name: "Longtail",
+    summary:
+      "Every Steam launch is sized with a rule of thumb — year one is two to five times week one — and nobody publishes how wrong it is. Longtail forecasts a game's first-year demand from its first seven days and, on 3,889 games released in 2025, cut the typical error from 59% (the industry rule) and 55% (the best simple formula) to 46%, clearing a pre-registered bar. Since October 2026 every week's launches are forecast before their outcomes exist and graded at day 30, 90 and 365.",
+    href: "https://github.com/Muhammad-Haris-3/Longtail",
+    tags: ["Forecasting", "Gradient Boosting", "Pre-registered", "Live"],
+  },
+  {
+    name: "Cadence",
+    summary:
+      "A private, local time tracker for Windows: a Python sampler records which window is in front and whether input happened, a FastAPI service serves the data, and an opt-in Claude API call turns each day's digest into a short written summary — with a structured system prompt, API error handling, and the cost of every call printed.",
+    href: "https://github.com/Muhammad-Haris-3/Cadence",
+    tags: ["LLM Integration", "Claude API", "FastAPI", "Python"],
   },
   {
     name: "Downfall",
